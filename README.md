@@ -1,3 +1,9 @@
+# Safe Blues Dashbaord
+
+Live [github pages site](https://joshjm.github.io/safeBluesDashboard/)
+
+
+
 # sb
 
 ## Project setup
