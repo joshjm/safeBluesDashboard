@@ -2,29 +2,21 @@
 
 Live [github pages site](https://joshjm.github.io/safeBluesDashboard/)
 
-
-
-# sb
-
-## Project setup
+## Setup
+To run development server locally:
 ```
+git clone https://github.com/joshjm/safeBluesDashboard.git
+cd safeBluesDashboard
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
 ```
 
-### Compiles and minifies for production
+To push build to production (github pages)
 ```
-npm run build
+./deploy.sh
 ```
+aftern ensuring `deploy.sh` is executable with `chmod +x deploy.sh`.
 
-### Lints and fixes files
+### Compiles and hot-reloads for development
 ```
-npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
