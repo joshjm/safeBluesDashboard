@@ -3,6 +3,7 @@
     <div id="bigLogo">
       <img alt="SafeBlues logo" src="../assets/logo.svg" />
     </div>
+    <h1>SafeBlues</h1>
     <HelloWorld msg="Welcome to SafeBlues Dashboard" />
   </div>
 </template>
