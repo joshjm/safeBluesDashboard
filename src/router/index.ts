@@ -1,11 +1,11 @@
-import Vue from "vue";
-import VueRouter, { RouteConfig } from "vue-router";
+import Vue from "vue"
+import VueRouter, { RouteConfig } from "vue-router"
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
-import Home from "../views/Home.vue";
-import About from "../views/About.vue";
-import Dashboard from "../views/Dashboard.vue";
+import Home from "../views/Home.vue"
+import About from "../views/About.vue"
+import Dashboard from "../views/Dashboard.vue"
 
 const routes: Array<RouteConfig> = [
   {
@@ -22,10 +22,10 @@ const routes: Array<RouteConfig> = [
     path: "/dashboard",
     component: Dashboard
   }
-];
+]
 
 const router = new VueRouter({
   routes
-});
+})
 
-export default router;
+export default router

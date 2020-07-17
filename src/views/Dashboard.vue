@@ -7,7 +7,7 @@
 
 <script>
 // @ is an alias to /src
-import Header from "@/components/Header.vue";
+import Header from "@/components/Header.vue"
 import TestPlot from "@/components/TestPlot.vue"
 export default {
   name: "Dashboard",
@@ -15,5 +15,5 @@ export default {
     Header,
     TestPlot
   }
-};
+}
 </script>
