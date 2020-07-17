@@ -1,17 +1,19 @@
 <template>
-  <div class="dashboard">
+  <div class="my-dashboard-container">
     <Header />
-    <h2>Hello world</h2>
+    <TestPlot />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Header from "@/components/Header.vue";
+import TestPlot from "@/components/TestPlot.vue"
 export default {
   name: "Dashboard",
   components: {
-    Header
+    Header,
+    TestPlot
   }
 };
 </script>
