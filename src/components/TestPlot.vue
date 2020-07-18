@@ -7,7 +7,8 @@
 
 <script>
 // import * as d3 from "d3";
-import Plotly from "plotly.js-dist"
+// import Plotly from "plotly.js-dist"
+import Plotly from "plotly.js"
 
 export default {
   name: "App",
@@ -45,8 +46,8 @@ export default {
         type: "bar"
       }
     ]
- 
-  console.log(data2);
+
+    console.log(data2)
     Plotly.newPlot("myDiv2", data2)
   }
 }
