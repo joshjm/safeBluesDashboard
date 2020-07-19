@@ -6,6 +6,7 @@ Vue.use(VueRouter)
 import Home from "../views/Home.vue"
 import About from "../views/About.vue"
 import Dashboard from "../views/Dashboard.vue"
+import Admin from "../views/Admin.vue"
 
 const routes: Array<RouteConfig> = [
   {
@@ -21,6 +22,12 @@ const routes: Array<RouteConfig> = [
   {
     path: "/dashboard",
     component: Dashboard
+  },
+  {
+    path: "/admin",
+    name: "Admin",
+    component: Admin
+
   }
 ]
 
