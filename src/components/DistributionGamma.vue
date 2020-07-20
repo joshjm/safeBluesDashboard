@@ -39,9 +39,9 @@ export default Vue.extend({
   data: () => {
     return {
       alpha: 5,
-      theta: 5
-      // x: [...Array(140).keys()].map(val => val / 10),
-      // y: this.x.map(val => this.gammaDist(val, this.alpha, this.theta))
+      theta: 5,
+      x: [...Array(140).keys()].map(val => val / 10),
+      y: this.x.map(val => this.gammaDist(val, this.alpha, this.theta))
     }
   },
   methods: {
@@ -53,21 +53,30 @@ export default Vue.extend({
       return value
     }
   },
-  // watch: {
-  //   alpha: Plotly.react("plot", this.data),
-  //   theta: Plotly.react("plot", this.data)
-  // },
+  watch: {
+    alpha: Plotly.react("plot", this.data),
+    theta: Plotly.react("plot", this.data)
+  },
   mounted() {
+    const layout = {
+      title: {
+        text: "Strain PDF"
+      },
+      xaxis: {
+        title: {
+          text: "x Axis"
+        }
+      },
+      yaxis: {
+        title: {
+          text: "y Axis"
+        }
+      }
+    }
     const x = [...Array(140).keys()].map(val => val / 10)
     const y = x.map(val => this.gammaDist(val, this.alpha, this.theta))
 
-    const trace1 = {
-      x: x,
-      y: y
-    }
-    const data = [trace1]
-
-    Plotly.newPlot("plot", data)
+    Plotly.newPlot("plot", [[x, y]], layout);
   }
 })
 </script>
