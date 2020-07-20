@@ -1,26 +1,26 @@
 <template>
   <div class="container">
     <!-- display for debugging -->
-    shape: {{ shape }}, rate: {{ rate }}, mean: {{Math.round(10*mean)/10}}, var: {{Math.round(100*variance)/100}}
+    shape: {{Math.round(100*shape)/100}}, rate: {{Math.round(100*rate)/100}}, mean: {{mean}}, var: {{variance}}
     <div class="row">
-      <input type="text" class="form-control w-25" v-model="shape" />
+      <input type="text" class="form-control w-25" v-model="mean" />
       <input
         type="range"
-        v-model="shape"
+        v-model="mean"
         min="0"
-        max="100"
+        max="20"
         class="custom-range"
         step="0.5"
         id="customRange1"
       />
     </div>
     <div class="row">
-      <input type="text" class="form-control w-25" v-model="rate" />
+      <input type="text" class="form-control w-25" v-model="variance" />
       <input
         type="range"
-        v-model="rate"
+        v-model="variance"
         min="0"
-        max="100"
+        max="25"
         class="custom-range"
         step="0.1"
         id="customRange2"
@@ -37,8 +37,8 @@ export default {
   name: "DistributionGamma",
   data: () => {
     return {
-      shape: 5,
-      rate: 5,
+      mean: 5,
+      variance: 5,
       x: [],
       y: [],
       layout: {
@@ -53,11 +53,11 @@ export default {
     }
   },
   computed:{
-    mean: function(){
-      return(this.shape/this.rate)
+    shape: function(){
+      return(this.mean**2/this.variance)
     },
-    variance: function(){
-      return(this.shape/(this.rate**2))
+    rate: function(){
+      return(this.mean/this.variance)
   },
     
   },
