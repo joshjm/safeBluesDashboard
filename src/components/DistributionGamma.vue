@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!-- display for debugging -->
-    shape: {{ shape }}, rate: {{ rate }}, mean: {{Math.round(10*shape/rate)/10}}, var: {{Math.round(100*shape/(rate**2))/100}}
+    shape: {{ shape }}, rate: {{ rate }}, mean: {{Math.round(10*mean)/10}}, var: {{Math.round(100*variance)/100}}
     <div class="row">
       <input type="text" class="form-control w-25" v-model="shape" />
       <input
@@ -52,6 +52,15 @@ export default {
       
     }
   },
+  computed:{
+    mean: function(){
+      return(this.shape/this.rate)
+    },
+    variance: function(){
+      return(this.shape/(this.rate**2))
+  },
+    
+  },
   watch: {
     shape() {
       this.updateData()
@@ -60,7 +69,8 @@ export default {
     rate() {
       this.updateData()
       Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout)
-    }
+    },
+
   },
   methods: {
     gammaDist: function(x, shape, rate) {
