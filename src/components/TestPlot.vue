@@ -2,7 +2,8 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <div id="myDiv"></div>
+        <DistributionGamma></DistributionGamma>
+        <!-- <div id="myDiv"></div> -->
       </div>
       <div class="col">
         <div class="card">
@@ -27,14 +28,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div id="myDiv2"></div>
-      </div>
-    </div>
-    <div class="row">
-      <DistributionGamma v-bind:alpha="3" v-bind:theta="2"></DistributionGamma>
     </div>
   </div>
 </template>
@@ -91,7 +84,7 @@ export default {
     }
     const data = [trace1, trace2]
 
-    Plotly.newPlot("myDiv", data, layout)
+    // Plotly.newPlot("myDiv", data, layout)
     const data2 = [
       {
         x: this.gdp.map(val => val.country),
@@ -99,7 +92,7 @@ export default {
         type: "bar"
       }
     ]
-    Plotly.newPlot("myDiv2", data2, layout)
+    // Plotly.newPlot("myDiv2", data2, layout)
   }
 }
 </script>

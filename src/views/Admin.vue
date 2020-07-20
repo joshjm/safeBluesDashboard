@@ -1,15 +1,12 @@
 <template>
-    <div>
-        <h3> Admin Content </h3>
-    </div>
+  <div>
+    <h3>Admin Content</h3>
+  </div>
 </template>
 
 <script>
-
 export default {
-    name: "Admin",
-    components: {
-
-    }
+  name: "Admin",
+  components: {}
 }
 </script>

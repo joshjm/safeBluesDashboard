@@ -27,7 +27,6 @@ const routes: Array<RouteConfig> = [
     path: "/admin",
     name: "Admin",
     component: Admin
-
   }
 ]
 
