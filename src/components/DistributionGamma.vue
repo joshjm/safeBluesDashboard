@@ -37,8 +37,8 @@ export default {
   name: "DistributionGamma",
   data: () => {
     return {
-      mean: 5,
-      variance: 5,
+      mean: 14,
+      variance: 2,
       x: [],
       y: [],
       layout: {
@@ -47,6 +47,10 @@ export default {
         xaxis: {
           title: "days",
           },
+        yaxis: {
+          range: [0,0.5]
+        },
+      
       width: 500
       }
       
@@ -81,7 +85,7 @@ export default {
       return value
     },
     updateData: function() {
-      this.x = [...Array(140).keys()].map(val => val / 10)
+      this.x = [...Array(25*10).keys()].map(val => val / 10)
       this.y = this.x.map(val => this.gammaDist(val, this.shape, this.rate))
     }
   },

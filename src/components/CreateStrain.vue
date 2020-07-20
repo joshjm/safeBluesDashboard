@@ -24,6 +24,7 @@
               title="Infectious Period Distribution"
               id="infectiousPeriodDistribution"
             />
+            <button type="button" class="btn btn-success">Infect</button>
           </div>
         </div>
       </div>
