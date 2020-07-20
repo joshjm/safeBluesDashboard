@@ -20,9 +20,9 @@
         type="range"
         v-model="theta"
         min="0"
-        max="10"
+        max="1"
         class="custom-range"
-        step="0.1"
+        step="0.01"
         id="customRange2"
       />
     </div>
@@ -39,9 +39,23 @@ export default Vue.extend({
   data: () => {
     return {
       alpha: 5,
-      theta: 5
-      // x: [...Array(140).keys()].map(val => val / 10),
-      // y: this.x.map(val => this.gammaDist(val, this.alpha, this.theta))
+      theta: 5,
+      x: [],
+      y: [],
+    }
+  },
+  watch: {
+    alpha() {
+      this.updateData();
+      Plotly.react('plot', [{x: this.x, y: this.y}]);
+      // Plotly.newPlot('plot', this.data);
+      console.log("WATCHING alpha ")
+    },
+    theta() {
+      this.updateData();
+      Plotly.react('plot', [{x: this.x, y: this.y}]);
+      console.log("WATCHING theta")
+      // Plotly.react('plot', this.data);
     }
   },
   methods: {
@@ -51,23 +65,18 @@ export default Vue.extend({
         Math.pow(x, alpha - 1) *
         Math.pow(Math.E, -x * theta)
       return value
+    },
+    updateData: function(){
+      this.x = [...Array(140).keys()].map(val => val / 10)
+      this.y = this.x.map((val) => this.gammaDist(val, this.alpha, this.theta))
     }
   },
-  // watch: {
-  //   alpha: Plotly.react("plot", this.data),
-  //   theta: Plotly.react("plot", this.data)
-  // },
+
   mounted() {
-    const x = [...Array(140).keys()].map(val => val / 10)
-    const y = x.map(val => this.gammaDist(val, this.alpha, this.theta))
-
-    const trace1 = {
-      x: x,
-      y: y
-    }
-    const data = [trace1]
-
-    Plotly.newPlot("plot", data)
+    // this.x = [...Array(140).keys()].map(val => val / 10)
+    // this.y = this.x.map((val) => this.gammaDist(val, this.alpha, this.theta))
+    this.updateData();
+    Plotly.newPlot("plot", [{x: this.x, y: this.y}])
   }
 })
 </script>
