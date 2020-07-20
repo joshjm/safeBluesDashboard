@@ -3,19 +3,21 @@
     <!-- nav bar -->
     <Navbar />
     <!-- content through router -->
-    <router-view></router-view>
-    <Footer />
+    <div class="content">
+      <router-view></router-view>
+    </div>
+    <!-- <Footer /> -->
   </div>
 </template>
 
 <script>
 import Navbar from "./components/Navbar"
-import Footer from "./components/Footer"
+// import Footer from "./components/Footer"
 export default {
   name: "app",
   components: {
-    Navbar: Navbar,
-    Footer: Footer
+    Navbar: Navbar
+    // Footer: Footer
   }
 }
 </script>
@@ -40,5 +42,9 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #3e7edd;
+}
+div.content {
+  max-width: 900px;
+  margin: 0 auto;
 }
 </style>
