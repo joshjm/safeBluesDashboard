@@ -32,30 +32,25 @@
 
 <script>
 import Plotly from "plotly.js"
-import Vue from "vue"
 import { gamma } from "mathjs"
-export default Vue.extend({
+export default {
   name: "DistributionGamma",
   data: () => {
     return {
       alpha: 5,
       theta: 5,
       x: [],
-      y: [],
+      y: []
     }
   },
   watch: {
     alpha() {
-      this.updateData();
-      Plotly.react('plot', [{x: this.x, y: this.y}]);
-      // Plotly.newPlot('plot', this.data);
-      console.log("WATCHING alpha ")
+      this.updateData()
+      Plotly.react("plot", [{ x: this.x, y: this.y }])
     },
     theta() {
-      this.updateData();
-      Plotly.react('plot', [{x: this.x, y: this.y}]);
-      console.log("WATCHING theta")
-      // Plotly.react('plot', this.data);
+      this.updateData()
+      Plotly.react("plot", [{ x: this.x, y: this.y }])
     }
   },
   methods: {
@@ -66,17 +61,15 @@ export default Vue.extend({
         Math.pow(Math.E, -x * theta)
       return value
     },
-    updateData: function(){
+    updateData: function() {
       this.x = [...Array(140).keys()].map(val => val / 10)
-      this.y = this.x.map((val) => this.gammaDist(val, this.alpha, this.theta))
+      this.y = this.x.map(val => this.gammaDist(val, this.alpha, this.theta))
     }
   },
 
   mounted() {
-    // this.x = [...Array(140).keys()].map(val => val / 10)
-    // this.y = this.x.map((val) => this.gammaDist(val, this.alpha, this.theta))
-    this.updateData();
-    Plotly.newPlot("plot", [{x: this.x, y: this.y}])
+    this.updateData()
+    Plotly.newPlot("plot", [{ x: this.x, y: this.y }])
   }
-})
+}
 </script>

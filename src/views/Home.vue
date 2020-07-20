@@ -4,7 +4,6 @@
       <img alt="SafeBlues logo" src="../assets/logo.svg" />
     </div>
     <h1>SafeBlues</h1>
-    <HelloWorld msg="Welcome to SafeBlues Dashboard" />
   </div>
 </template>
 
@@ -16,13 +15,8 @@
 </style>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue"
-
 export default {
   name: "Home",
-  components: {
-    HelloWorld
-  }
+  components: {}
 }
 </script>

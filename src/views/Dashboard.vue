@@ -1,19 +1,19 @@
 <template>
   <div class="my-dashboard-container">
     <Header />
-    <TestPlot />
+    <CreateStrain />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Header from "@/components/Header.vue"
-import TestPlot from "@/components/TestPlot.vue"
+import CreateStrain from "@/components/CreateStrain.vue"
 export default {
   name: "Dashboard",
   components: {
     Header,
-    TestPlot
+    CreateStrain
   }
 }
 </script>
