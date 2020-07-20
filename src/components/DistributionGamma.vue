@@ -1,16 +1,16 @@
 <template>
   <div class="container">
     <!-- display for debugging -->
-    shape: {{ shape }}, rate: {{ rate }}
+    shape: {{ shape }}, rate: {{ rate }}, mean: {{Math.round(10*shape/rate)/10}}, var: {{Math.round(100*shape/(rate**2))/100}}
     <div class="row">
       <input type="text" class="form-control w-25" v-model="shape" />
       <input
         type="range"
         v-model="shape"
         min="0"
-        max="10"
+        max="100"
         class="custom-range"
-        step="0.1"
+        step="0.5"
         id="customRange1"
       />
     </div>
@@ -20,9 +20,9 @@
         type="range"
         v-model="rate"
         min="0"
-        max="1"
+        max="100"
         class="custom-range"
-        step="0.01"
+        step="0.1"
         id="customRange2"
       />
     </div>
@@ -40,17 +40,26 @@ export default {
       shape: 5,
       rate: 5,
       x: [],
-      y: []
+      y: [],
+      layout: {
+        title: "Incubation Period",
+        autosize: true,
+        xaxis: {
+          title: "days",
+          },
+      width: 500
+      }
+      
     }
   },
   watch: {
     shape() {
       this.updateData()
-      Plotly.react("plot", [{ x: this.x, y: this.y }])
+      Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout)
     },
     rate() {
       this.updateData()
-      Plotly.react("plot", [{ x: this.x, y: this.y }])
+      Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout)
     }
   },
   methods: {
@@ -69,7 +78,7 @@ export default {
 
   mounted() {
     this.updateData()
-    Plotly.newPlot("plot", [{ x: this.x, y: this.y }])
+    Plotly.newPlot("plot", [{ x: this.x, y: this.y }], this.layout)
   }
 }
 </script>

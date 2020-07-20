@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home content">
     <div id="bigLogo">
       <img alt="SafeBlues logo" src="../assets/logo.svg" />
     </div>

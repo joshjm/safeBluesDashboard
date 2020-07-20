@@ -3,9 +3,7 @@
     <!-- nav bar -->
     <Navbar />
     <!-- content through router -->
-    <div class="content">
       <router-view></router-view>
-    </div>
     <!-- <Footer /> -->
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="about content">
     <h1>
       Safe Blues: A Method for Estimation and Control in the Fight Against
       COVID-19
