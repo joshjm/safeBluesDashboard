@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <!-- display for debugging -->
-    alpha: {{ alpha }}, theta: {{ theta }}
+    shape: {{ shape }}, rate: {{ rate }}
     <div class="row">
-      <input type="text" class="form-control w-25" v-model="alpha" />
+      <input type="text" class="form-control w-25" v-model="shape" />
       <input
         type="range"
-        v-model="alpha"
+        v-model="shape"
         min="0"
         max="10"
         class="custom-range"
@@ -15,10 +15,10 @@
       />
     </div>
     <div class="row">
-      <input type="text" class="form-control w-25" v-model="theta" />
+      <input type="text" class="form-control w-25" v-model="rate" />
       <input
         type="range"
-        v-model="theta"
+        v-model="rate"
         min="0"
         max="1"
         class="custom-range"
@@ -37,33 +37,33 @@ export default {
   name: "DistributionGamma",
   data: () => {
     return {
-      alpha: 5,
-      theta: 5,
+      shape: 5,
+      rate: 5,
       x: [],
       y: []
     }
   },
   watch: {
-    alpha() {
+    shape() {
       this.updateData()
       Plotly.react("plot", [{ x: this.x, y: this.y }])
     },
-    theta() {
+    rate() {
       this.updateData()
       Plotly.react("plot", [{ x: this.x, y: this.y }])
     }
   },
   methods: {
-    gammaDist: function(x, alpha, theta) {
+    gammaDist: function(x, shape, rate) {
       const value =
-        (Math.pow(theta, alpha) / gamma(x)) *
-        Math.pow(x, alpha - 1) *
-        Math.pow(Math.E, -x * theta)
+        (Math.pow(rate, shape) / gamma(shape)) *
+        Math.pow(x, shape - 1) *
+        Math.pow(Math.E, -x * rate)
       return value
     },
     updateData: function() {
       this.x = [...Array(140).keys()].map(val => val / 10)
-      this.y = this.x.map(val => this.gammaDist(val, this.alpha, this.theta))
+      this.y = this.x.map(val => this.gammaDist(val, this.shape, this.rate))
     }
   },
 
