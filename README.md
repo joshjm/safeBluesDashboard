@@ -23,6 +23,3 @@ To push build to production (github pages)
 ```
 aftern ensuring `deploy.sh` is executable with `chmod +x deploy.sh`.
 
-### Compiles and hot-reloads for development
-```
-```
