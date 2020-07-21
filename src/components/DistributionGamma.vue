@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <!-- display for debugging -->
-    shape: {{Math.round(100*shape)/100}}, rate: {{Math.round(100*rate)/100}}, mean: {{mean}}, var: {{variance}}
+    shape: {{ Math.round(100 * shape) / 100 }}, rate:
+    {{ Math.round(100 * rate) / 100 }}, mean: {{ mean }}, var: {{ variance }}
     <div class="row">
       <input type="text" class="form-control w-25" v-model="mean" />
       <input
@@ -45,25 +46,23 @@ export default {
         title: "Incubation Period",
         autosize: true,
         xaxis: {
-          title: "days",
-          },
-        yaxis: {
-          range: [0,0.5]
+          title: "days"
         },
-      
-      width: 500
+        yaxis: {
+          range: [0, 0.5]
+        },
+
+        width: 500
       }
-      
     }
   },
-  computed:{
-    shape: function(){
-      return(this.mean**2/this.variance)
+  computed: {
+    shape: function() {
+      return this.mean ** 2 / this.variance
     },
-    rate: function(){
-      return(this.mean/this.variance)
-  },
-    
+    rate: function() {
+      return this.mean / this.variance
+    }
   },
   watch: {
     shape() {
@@ -73,8 +72,7 @@ export default {
     rate() {
       this.updateData()
       Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout)
-    },
-
+    }
   },
   methods: {
     gammaDist: function(x, shape, rate) {
@@ -85,7 +83,7 @@ export default {
       return value
     },
     updateData: function() {
-      this.x = [...Array(25*10).keys()].map(val => val / 10)
+      this.x = [...Array(25 * 10).keys()].map(val => val / 10)
       this.y = this.x.map(val => this.gammaDist(val, this.shape, this.rate))
     }
   },
