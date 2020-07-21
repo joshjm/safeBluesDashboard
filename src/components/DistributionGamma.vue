@@ -49,11 +49,7 @@ export default {
           title: "days"
         },
         yaxis: {
-<<<<<<< HEAD
-          range: [0, 0.5]
-=======
           range: [0,1]
->>>>>>> 12176be70f6cb88303abb8175353f126ed533bf2
         },
 
         width: 500
