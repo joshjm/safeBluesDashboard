@@ -21,8 +21,5 @@ To push build to production (github pages)
 ```
 ./deploy.sh
 ```
-aftern ensuring `deploy.sh` is executable with `chmod +x deploy.sh`.
+After ensuring `deploy.sh` is executable with `chmod +x deploy.sh`.
 
-### Compiles and hot-reloads for development
-```
-```
