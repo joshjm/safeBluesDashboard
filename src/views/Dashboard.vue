@@ -1,7 +1,8 @@
 <template>
   <div class="my-dashboard-container">
     <Header />
-    {{ this.covidAPIData }}
+    <!-- {{ this.jsonCovidAPIData }} -->
+    {{ this.arrayCovidApiData }}
   
   </div>
 </template>
@@ -17,20 +18,26 @@ export default {
   },
   data: () => {
     return {
-      covidAPIData: []
+      jsonCovidAPIData: []
     }
   },
-  // methods: {
-    
-  // },
-  // computed:{
-    
-  // },
+  methods: {
+    parseCovidApiJsonToArray: function (jsonData) {
+      const array = ["Country", "Province", "Date", "Confirmed", "Deaths", "Recovered", "Active"]
+      jsonData.map(entryObject => array.push([entryObject.Country, entryObject.Province, entryObject.Date,entryObject.Confirmed, entryObject.Deaths, entryObject.Recovered, entryObject.Active]) )
+       return array
+    }
+  },
+  computed:{
+    arrayCovidApiData: function(){
+      return this.parseCovidApiJsonToArray(this.jsonCovidAPIData)
+    }
+  },
   
   mounted() {
-      axios
-        .get("https://api.covid19api.com/dayone/country/australia")
-        .then(response => (this.covidAPIData = response.data)) 
+    axios
+      .get("https://api.covid19api.com/dayone/country/australia")
+      .then(response => (this.jsonCovidAPIData = response.data))
     }
   }
 
