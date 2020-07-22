@@ -2,6 +2,7 @@
   <div class="my-dashboard-container">
     <Header />
     {{ this.covidAPIData }}
+  
   </div>
 </template>
 
@@ -29,12 +30,7 @@ export default {
   mounted() {
       axios
         .get("https://api.covid19api.com/dayone/country/australia")
-        .then(function(res) {
-          console.log(res)
-          // this.covidAPIData = res
-
-        })
-     
+        .then(response => (this.covidAPIData = response.data)) 
     }
   }
 
