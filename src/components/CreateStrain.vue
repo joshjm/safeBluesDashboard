@@ -22,7 +22,11 @@
             </div>
             <div class="form-group">
               <label>Seeding Probability</label>
-              <input type="text" v-model="seedingProbability" class="form-control" />
+              <input
+                type="text"
+                v-model="seedingProbability"
+                class="form-control"
+              />
             </div>
             <div class="form-group">
               <label>Infection Probability Map</label>
