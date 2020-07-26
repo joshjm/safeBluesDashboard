@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/vuetify/types"
+    ],
     "target": "esnext",
     "module": "esnext",
     "strict": true,
@@ -12,7 +16,8 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env"
+      "webpack-env",
+      "vuetify"
     ],
     "paths": {
       "@/*": [
