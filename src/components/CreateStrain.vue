@@ -8,45 +8,45 @@
         <div class="card">
           <div class="card-body">
             <h3 class="center">New Virus Parameters</h3>
-            <div class="row">
+            <div class=" form-group">
               <label>Strand ID</label>
-              <input type="text" v-model="strandID" class="w-25" />
+              <input type="text" v-model="strandID" class="form-control" />
             </div>
-            <div class="row">
+            <div class="form-group">
               <label>Start Time</label>
-              <input type="text" v-model="startTime" class="w-25" />
+              <input type="text" v-model="startTime" class="form-control" />
             </div>
-            <div class="row">
+            <div class="form-group">
               <label>End time</label>
-              <input type="text" v-model="endTime" class="w-25" />
+              <input type="text" v-model="endTime" class="form-control" />
             </div>
-            <div class="row">
+            <div class="form-group">
               <label>Seeding Probability</label>
-              <input type="text" v-model="seedingProbability" class="w-25" />
+              <input type="text" v-model="seedingProbability" class="form-control" />
             </div>
-            <div class="row">
+            <div class="form-group">
               <label>Infection Probability Map</label>
               <input
                 type="text"
                 v-model="infectionProbabilityMap"
-                class="w-25"
+                class="form-control"
               />
             </div>
-            <div class="row">
+            <div class="form-group">
               <label>incubationPeriodDistribution</label>
               <input
                 type="text"
                 v-model="incubationPeriodDistribution"
-                class="w-25"
+                class="form-control"
               />
             </div>
 
-            <div class="row">
+            <div class="form-group">
               <label>infectiousPeriodDistribution</label>
               <input
                 type="text"
                 v-model="infectiousPeriodDistribution"
-                class="w-25"
+                class="form-control"
               />
             </div>
 
@@ -70,7 +70,7 @@ export default {
   },
   data: () => {
     return {
-      safeBluesURL: "http://safeblues.org/5000",
+      safeBluesURL: "api.safeblues.org:5000/stats/1",
       strandID: "this is the id",
       startTime: "",
       endTime: "",

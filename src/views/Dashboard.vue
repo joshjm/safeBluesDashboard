@@ -64,19 +64,11 @@ export default {
       .then(response => (this.jsonCovidAPIData = response.data))
 
     // get data from safe blues AWS
-    const safeBluesURL = ""
+    const safeBluesURL = "api.safeblues.org:5000/stats/1"
     axios
       .get(safeBluesURL)
-      .then(response => (this.safeBluesData = response.data))
-    // test post to backend
-    axios
-      .post(safeBluesURL, { input1: "hello world of safeblues" })
-      .then(function(response) {
-        console.log(response)
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
+      .then(response => console.log(response))
+      .catch(error => console.log(error))
   }
 }
 </script>
