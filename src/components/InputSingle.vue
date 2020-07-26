@@ -3,7 +3,7 @@
     <div class="input-group-prepend">
       <span class="input-group-text">{{ this.title }}</span>
     </div>
-    <input type="text" class="form-control" />
+    <input type="text" class="form-control" v-model="this.value" />
   </div>
 </template>
 
@@ -12,7 +12,8 @@ export default {
   name: "InputSingle",
   props: {
     title: String,
-    id: String
+    id: String,
+    value: String
   }
 }
 </script>

@@ -2,8 +2,9 @@
   <div class="my-dashboard-container">
     <Header />
     <!-- {{ this.jsonCovidAPIData }} -->
-    {{ this.arrayCovidApiData }}
-  
+    {{ this.arraySafeBluesApiData }}
+
+    <!-- {{ this.arrayCovidApiData }} -->
   </div>
 </template>
 
@@ -18,27 +19,64 @@ export default {
   },
   data: () => {
     return {
-      jsonCovidAPIData: []
+      jsonCovidAPIData: [],
+      safeBluesData: []
     }
   },
   methods: {
-    parseCovidApiJsonToArray: function (jsonData) {
-      const array = ["Country", "Province", "Date", "Confirmed", "Deaths", "Recovered", "Active"]
-      jsonData.map(entryObject => array.push([entryObject.Country, entryObject.Province, entryObject.Date,entryObject.Confirmed, entryObject.Deaths, entryObject.Recovered, entryObject.Active]) )
-       return array
+    parseCovidApiJsonToArray: function(jsonData) {
+      const array = [
+        "Country",
+        "Province",
+        "Date",
+        "Confirmed",
+        "Deaths",
+        "Recovered",
+        "Active"
+      ]
+      jsonData.map(entryObject =>
+        array.push([
+          entryObject.Country,
+          entryObject.Province,
+          entryObject.Date,
+          entryObject.Confirmed,
+          entryObject.Deaths,
+          entryObject.Recovered,
+          entryObject.Active
+        ])
+      )
+      return array
     }
   },
-  computed:{
-    arrayCovidApiData: function(){
+  computed: {
+    arrayCovidApiData: function() {
       return this.parseCovidApiJsonToArray(this.jsonCovidAPIData)
+    },
+    arraySafeBluesApiData: function() {
+      return this.parseCovidApiJsonToArray(this.safeBluesData)
     }
   },
-  
+
   mounted() {
+    // get data from covid19 api
     axios
       .get("https://api.covid19api.com/dayone/country/australia")
       .then(response => (this.jsonCovidAPIData = response.data))
-    }
-  }
 
+    // get data from safe blues AWS
+    const safeBluesURL = ""
+    axios
+      .get(safeBluesURL)
+      .then(response => (this.safeBluesData = response.data))
+    // test post to backend
+    axios
+      .post(safeBluesURL, { input1: "hello world of safeblues" })
+      .then(function(response) {
+        console.log(response)
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
+  }
+}
 </script>
