@@ -1,67 +1,71 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col">
+<v-container fluid>
+  <v-row>
+      <v-col cols="6">
         <DistributionGamma></DistributionGamma>
-      </div>
-      <div class="col">
-        <div class="card">
-          <div class="card-body">
-            <h3 class="center">New Virus Parameters</h3>
-            <div class=" form-group">
-              <label>Strand ID</label>
-              <input type="text" v-model="strandID" class="form-control" />
-            </div>
-            <div class="form-group">
-              <label>Start Time</label>
-              <input type="text" v-model="startTime" class="form-control" />
-            </div>
-            <div class="form-group">
-              <label>End time</label>
-              <input type="text" v-model="endTime" class="form-control" />
-            </div>
-            <div class="form-group">
-              <label>Seeding Probability</label>
-              <input
-                type="text"
-                v-model="seedingProbability"
-                class="form-control"
-              />
-            </div>
-            <div class="form-group">
-              <label>Infection Probability Map</label>
-              <input
-                type="text"
-                v-model="infectionProbabilityMap"
-                class="form-control"
-              />
-            </div>
-            <div class="form-group">
-              <label>incubationPeriodDistribution</label>
-              <input
-                type="text"
-                v-model="incubationPeriodDistribution"
-                class="form-control"
-              />
-            </div>
-
-            <div class="form-group">
-              <label>infectiousPeriodDistribution</label>
-              <input
-                type="text"
-                v-model="infectiousPeriodDistribution"
-                class="form-control"
-              />
-            </div>
-
-            <button type="button" v-on:click="sendData" class="btn btn-success">
-              Infect
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+      </v-col>
+      <v-col cols="6">
+        <h3 class="center">New Virus Parameters</h3>
+        <v-form> 
+            <v-text-field
+              v-model="strandID"
+              label="Strand ID"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="startDate"
+              label="startDate"
+              type="date"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="startTime"
+              label="startTime"
+              type="time"
+              required
+            ></v-text-field>
+              <v-text-field
+              v-model="endDate"
+              label="endDate"
+              type="date"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="endTime"
+              label="endTime"
+              type="time"
+              required
+            ></v-text-field>
+            
+             <v-text-field
+              v-model="seedingProbability"
+              label="Seeding Probability"
+              type="number"
+              required
+            ></v-text-field>
+             <v-text-field
+              v-model="infectionProbabilityMap"
+              label="Infection Probability Map"
+              required
+            ></v-text-field>
+              <v-text-field
+              v-model="incubationPeriodDistribution"
+              label="incubationPeriodDistribution"
+              required
+            ></v-text-field>
+             <v-combobox
+              v-model="infectiousPeriodDistribution"
+              label="infectiousPeriodDistribution"
+              :items="distributions"
+              required
+            ></v-combobox>
+          <button type="button" v-on:click="sendData" class="btn btn-success">
+            Infect
+          </button>
+      </v-form>
+      </v-col>
+      </v-row>
+      </v-container>
 </template>
 
 <script>
@@ -74,10 +78,13 @@ export default {
   },
   data: () => {
     return {
+      distributions: ['Gamma', 'other'],
       safeBluesURL: "api.safeblues.org:5000/stats/1",
       strandID: "this is the id",
       startTime: "",
+      startDate: "",
       endTime: "",
+      endDate: "",
       seedingProbability: "",
       infectionProbabilityMap: "",
       incubationPeriodDistribution: "",
