@@ -8,33 +8,48 @@
         <div class="card">
           <div class="card-body">
             <h3 class="center">New Virus Parameters</h3>
-            <InputSingle title="Strand ID" id="strandID" value="strandID"  />
-            <InputSingle
-              v-model="startTime"
-              title="Start Time"
-              id="startTime"
-            />
-            <InputSingle v-model="endTime" title="End Time" id="endTime" />
-            <InputSingle
-              v-model="seedingProbability"
-              title="Seeding Probability"
-              id="seedingProbability"
-            />
-            <InputSingle
-              v-model="infectionProbabilityMap"
-              title="Infection Probability Map"
-              id="infectionProbabilityMap"
-            />
-            <InputSingle
-              v-model="incubationPeriodDistribution"
-              title="Incubation Period Distribution"
-              id="incubationPeriodDistribution"
-            />
-            <InputSingle
-              v-model="infectiousPeriodDistribution"
-              title="Infectious Period Distribution"
-              id="infectiousPeriodDistribution"
-            />
+            <div class="row">
+              <label>Strand ID</label>
+              <input type="text" v-model="strandID" class="w-25" />
+            </div>
+            <div class="row">
+              <label>Start Time</label>
+              <input type="text" v-model="startTime" class="w-25" />
+            </div>
+            <div class="row">
+              <label>End time</label>
+              <input type="text" v-model="endTime" class="w-25" />
+            </div>
+            <div class="row">
+              <label>Seeding Probability</label>
+              <input type="text" v-model="seedingProbability" class="w-25" />
+            </div>
+            <div class="row">
+              <label>Infection Probability Map</label>
+              <input
+                type="text"
+                v-model="infectionProbabilityMap"
+                class="w-25"
+              />
+            </div>
+            <div class="row">
+              <label>incubationPeriodDistribution</label>
+              <input
+                type="text"
+                v-model="incubationPeriodDistribution"
+                class="w-25"
+              />
+            </div>
+
+            <div class="row">
+              <label>infectiousPeriodDistribution</label>
+              <input
+                type="text"
+                v-model="infectiousPeriodDistribution"
+                class="w-25"
+              />
+            </div>
+
             <button type="button" v-on:click="sendData" class="btn btn-success">
               Infect
             </button>
@@ -47,17 +62,15 @@
 
 <script>
 import DistributionGamma from "@/components/DistributionGamma.vue"
-import InputSingle from "./InputSingle"
 import axios from "axios"
 export default {
   name: "CreateStrain",
   components: {
-    InputSingle, // locally register, consider making global later
     DistributionGamma
   },
   data: () => {
     return {
-      safeBluesURL: "http://testsite.com",
+      safeBluesURL: "http://safeblues.org/5000",
       strandID: "this is the id",
       startTime: "",
       endTime: "",
