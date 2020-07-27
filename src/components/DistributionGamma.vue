@@ -28,6 +28,7 @@
       />
     </div>
     <div id="plot"></div>
+    <p v-if="overflow"> Shape has grown too large to display graph. </p>
   </div>
 </template>
 
@@ -42,6 +43,7 @@ export default {
       variance: 2,
       x: [],
       y: [],
+      overflow: false,
       layout: {
         title: "Incubation Period",
         autosize: true,
@@ -76,6 +78,11 @@ export default {
   },
   methods: {
     gammaDist: function(x, shape, rate) {
+      if (gamma(shape)==Infinity){ // gamma(shape) can grow to E300, and cause NaNs.
+        this.overflow = true
+        return 0
+      } 
+      this.overflow = false
       const value =
         (Math.pow(rate, shape) / gamma(shape)) *
         Math.pow(x, shape - 1) *
