@@ -1,10 +1,8 @@
 <template>
   <div class="my-dashboard-container">
     <Header />
-    <!-- {{ this.jsonCovidAPIData }} -->
 
-    
-    <!-- {{ safeBluesData.stats }} -->
+    <div class="table">
     <v-card class="mx-auto" max-width="344" v-for="item in safeBluesData.stats" :key="item.strandId" > 
       <v-card-text>
         <h3> Strain Id: {{item.strandId}} </h3>
@@ -14,7 +12,18 @@
         <p>Total removed strands: {{item.totalRemovedStrands}}</p>
       </v-card-text>
       </v-card>
-    <!-- {{ this.arrayCovidApiData }} -->
+      </div>
+    <!-- {{ this.jsonCovidAPIData }} -->
+    <h2>John Hopkins Covid data: (to compare)</h2>
+    <v-data-table 
+      :headers="headers"
+      :items="jsonCovidAPIData"
+      :items-per-page="20"
+      class="elevation-1"
+    > 
+    </v-data-table>
+
+    
   </div>
 </template>
 
@@ -30,41 +39,47 @@ export default {
   data: () => {
     return {
       jsonCovidAPIData: [],
-      safeBluesData: []
+      safeBluesData: [],
+      headers: [
+        // {text: 'Country', value: 'Country'},
+        // {text: "Country Code", value: "CountryCode"},
+        {text: "Province", value: "Province"},
+        // {text: "City", value: "City"},
+        // {text: "City Code", value: "CityCode"},
+        // {text: "Latitude", value: "Lat"},
+        // {text: "Longitude", value: "Lon"},
+        {text: "Confirmed", value: "Confirmed"},
+        {text: "Deaths", value: "Deaths"},
+        {text: "Recovered", value: "Recovered"},
+        {text: "Active", value: "Active"},
+        {text: "Date", value: "Date"}
+      ]
     }
   },
   methods: {
-    // parseCovidApiJsonToArray: function(jsonData) {
-    //   const array = [
-    //     "Country",
-    //     "Province",
-    //     "Date",
-    //     "Confirmed",
-    //     "Deaths",
-    //     "Recovered",
-    //     "Active"
-    //   ]
-    //   jsonData.map(entryObject =>
-    //     array.push([
-    //       entryObject.Country,
-    //       entryObject.Province,
-    //       entryObject.Date,
-    //       entryObject.Confirmed,
-    //       entryObject.Deaths,
-    //       entryObject.Recovered,
-    //       entryObject.Active
-    //     ])
-    //   )
-    //   return array
-    // }
+   
   },
   computed: {
-    // arrayCovidApiData: function() {
-    //   return this.parseCovidApiJsonToArray(this.jsonCovidAPIData)
-    // },
-    // arraySafeBluesApiData: function() {
-    //   return this.parseCovidApiJsonToArray(this.safeBluesData)
-    // }
+    qldData: function(){
+      return this.jsonCovidAPIData.filter(data => data.Province === "Queensland")
+    },
+    vicData: function(){
+      return this.jsonCovidAPIData.filter(data => data.Province === "Victoria")
+    },
+    nswData: function(){
+      return this.jsonCovidAPIData.filter(data => data.Province === "New South Wales")
+    },
+    saData: function(){
+      return this.jsonCovidAPIData.filter(data => data.Province === "South Australia")
+    },
+    ntData: function(){
+      return this.jsonCovidAPIData.filter(data => data.Province === "Northern Territory")
+    },
+    waData: function(){
+      return this.jsonCovidAPIData.filter(data => data.Province === "Western Australia")
+    }
+    
+
   },
 
   mounted() {

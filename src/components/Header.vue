@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <h2>Header content coming soon</h2>
+    <h2>Dashboard</h2>
+    <p>View info on current strains here</p>
   </div>
 </template>
 
