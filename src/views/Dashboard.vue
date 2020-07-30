@@ -1,8 +1,8 @@
 <template>
   <div class="my-dashboard-container">
     <Header />
-
-    <div class="table">
+<!-- TODO: refactor the table into a component -->
+    <div class="table"> 
       <v-card
         class="mx-auto"
         max-width="344"
@@ -36,7 +36,7 @@
 // @ is an alias to /src
 import Plotly from "plotly.js"
 import Header from "@/components/Header.vue"
-import ActiveCasesPlot from "@/components/ActiveCasesPlot.vue"
+import ActiveCasesPlot from "@/components/dashboard/ActiveCasesPlot.vue"
 const axios = require("axios").default
 export default {
   name: "Dashboard",
@@ -72,6 +72,7 @@ export default {
   watch: {},
   mounted() {
     // get data from covid19 api
+    // NOTE: keeping out of the active-plot component as other components may need this data
     axios
       .get("https://api.covid19api.com/dayone/country/australia")
       .then(response => (this.jsonCovidAPIData = response.data))

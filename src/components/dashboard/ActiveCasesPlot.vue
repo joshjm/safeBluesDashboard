@@ -16,6 +16,7 @@ export default {
     }
   },
   computed: {
+    // TODO: do all this in a loop on the set of unique values for province to make more DRY
     qldData: function() {
       return this.jsonCovidAPIData
         .filter(data => data.Province === "Queensland")
