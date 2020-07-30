@@ -28,7 +28,7 @@
       />
     </div>
     <div id="plot"></div>
-    <p v-if="overflow"> Shape has grown too large to display graph. </p>
+    <p v-if="overflow">Shape has grown too large to display graph.</p>
   </div>
 </template>
 
@@ -78,10 +78,11 @@ export default {
   },
   methods: {
     gammaDist: function(x, shape, rate) {
-      if (gamma(shape)==Infinity){ // gamma(shape) can grow to E300, and cause NaNs.
+      if (gamma(shape) == Infinity) {
+        // gamma(shape) can grow to E300, and cause NaNs.
         this.overflow = true
         return 0
-      } 
+      }
       this.overflow = false
       const value =
         (Math.pow(rate, shape) / gamma(shape)) *
