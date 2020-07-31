@@ -1,8 +1,8 @@
 <template>
   <div class="my-dashboard-container">
     <Header />
-<!-- TODO: refactor the table into a component -->
-    <div class="table"> 
+    <!-- TODO: refactor the table into a component -->
+    <div class="table">
       <v-card
         class="mx-auto"
         max-width="344"
@@ -18,27 +18,41 @@
         </v-card-text>
       </v-card>
     </div>
-
-    <active-cases-plot v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
-
-    <h2>John Hopkins Covid data: (to compare)</h2>
-    <data-table v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
-
+    <v-container fluid>
+      <v-row>
+        <v-col cols="12">
+          <h2>John Hopkins Covid data: (to compare)</h2>
+          <data-table v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
+        </v-col>
+        <v-row>
+          <v-col cols="6">
+            <active-cases-plot
+              v-bind:jsonCovidAPIData="this.jsonCovidAPIData"
+            />
+          </v-col>
+          <v-col cols="6">
+            <confirmed-cases-plot
+              v-bind:jsonCovidAPIData="this.jsonCovidAPIData"
+            />
+          </v-col>
+        </v-row>
+      </v-row>
+    </v-container>
     <!-- <v-data-table
       :headers="headers"
       :items="jsonCovidAPIData"
       :items-per-page="20"
       class="elevation-1"
     >
-    </v-data-table> -->
+    </v-data-table>-->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Plotly from "plotly.js"
 import Header from "@/components/Header.vue"
 import ActiveCasesPlot from "@/components/dashboard/ActiveCasesPlot.vue"
+import ConfirmedCasesPlot from "@/components/dashboard/ConfirmedCasesPlot.vue"
 import DataTable from "@/components/dashboard/DataTable.vue"
 const axios = require("axios").default
 export default {
@@ -46,19 +60,19 @@ export default {
   components: {
     Header,
     ActiveCasesPlot,
+    ConfirmedCasesPlot,
     DataTable
   },
   data: () => {
     return {
       jsonCovidAPIData: [],
-      safeBluesData: [],
-      
+      safeBluesData: []
     }
   },
   methods: {},
   computed: {},
   watch: {},
-  mounted() {
+  created() {
     // get data from covid19 api
     // NOTE: keeping out of the active-plot component as other components may need this data
     axios

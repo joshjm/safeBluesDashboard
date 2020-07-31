@@ -56,7 +56,7 @@ export default {
 
         width: 500
       },
-    config: {responsive: true}
+      config: { responsive: true }
     }
   },
   computed: {
