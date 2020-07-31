@@ -55,7 +55,8 @@ export default {
         },
 
         width: 500
-      }
+      },
+    config: {responsive: true}
     }
   },
   computed: {
@@ -69,11 +70,11 @@ export default {
   watch: {
     shape() {
       this.updateData()
-      Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout)
+      Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout, this.config)
     },
     rate() {
       this.updateData()
-      Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout)
+      Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout, this.config)
     }
   },
   methods: {
@@ -98,7 +99,7 @@ export default {
 
   mounted() {
     this.updateData()
-    Plotly.newPlot("plot", [{ x: this.x, y: this.y }], this.layout)
+    Plotly.newPlot("plot", [{ x: this.x, y: this.y }], this.layout, this.config)
   }
 }
 </script>

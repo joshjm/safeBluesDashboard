@@ -12,7 +12,8 @@ export default {
     return {
       layout: {
         title: "Active cases"
-      }
+      },
+    config: {responsive: true}
     }
   },
   computed: {
@@ -102,11 +103,11 @@ export default {
   },
   watch: {
     data() {
-      Plotly.react("active-plot", this.data, this.layout)
+      Plotly.react("active-plot", this.data, this.layout, this.config)
     }
   },
   mounted() {
-    Plotly.newPlot("active-plot", this.data, this.layout)
+    Plotly.newPlot("active-plot", this.data, this.layout, this.config)
   }
 }
 </script>
