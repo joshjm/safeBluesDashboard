@@ -2,7 +2,7 @@
   <div>
     <v-data-table
       :headers="headers"
-      :items="jsonCovidAPIData"
+      :items="this.jsonCovidAPIData"
       :items-per-page="20"
       class="elevation-1"
     >

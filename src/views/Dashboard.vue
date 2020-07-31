@@ -22,14 +22,15 @@
     <active-cases-plot v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
 
     <h2>John Hopkins Covid data: (to compare)</h2>
-    <data-table v-bind:jsonCovidData="this.jsonCovidData" />
-    <v-data-table
+    <data-table v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
+
+    <!-- <v-data-table
       :headers="headers"
       :items="jsonCovidAPIData"
       :items-per-page="20"
       class="elevation-1"
     >
-    </v-data-table>
+    </v-data-table> -->
   </div>
 </template>
 
@@ -51,23 +52,7 @@ export default {
     return {
       jsonCovidAPIData: [],
       safeBluesData: [],
-      headers: [
-        // {text: 'Country', value: 'Country'},
-        // {text: "Country Code", value: "CountryCode"},
-        { text: "Province", value: "Province" },
-        // {text: "City", value: "City"},
-        // {text: "City Code", value: "CityCode"},
-        // {text: "Latitude", value: "Lat"},
-        // {text: "Longitude", value: "Lon"},
-        { text: "Confirmed", value: "Confirmed" },
-        { text: "Deaths", value: "Deaths" },
-        { text: "Recovered", value: "Recovered" },
-        { text: "Active", value: "Active" },
-        { text: "Date", value: "Date" }
-      ],
-      layout: {
-        title: "Active cases"
-      }
+      
     }
   },
   methods: {},
