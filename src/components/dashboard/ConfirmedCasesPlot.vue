@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="active-plot"></div>
+    <div id="confirmed-plot"></div>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
   data: function() {
     return {
       layout: {
-        title: "Active cases"
+        title: "Confirmed cases"
       },
       config: { responsive: true }
     }
@@ -21,32 +21,32 @@ export default {
     qldData: function() {
       return this.jsonCovidAPIData
         .filter(data => data.Province === "Queensland")
-        .map(item => [item.Date, item.Active])
+        .map(item => [item.Date, item.Confirmed])
     },
     vicData: function() {
       return this.jsonCovidAPIData
         .filter(data => data.Province === "Victoria")
-        .map(item => [item.Date, item.Active])
+        .map(item => [item.Date, item.Confirmed])
     },
     nswData: function() {
       return this.jsonCovidAPIData
         .filter(data => data.Province === "New South Wales")
-        .map(item => [item.Date, item.Active])
+        .map(item => [item.Date, item.Confirmed])
     },
     saData: function() {
       return this.jsonCovidAPIData
         .filter(data => data.Province === "South Australia")
-        .map(item => [item.Date, item.Active])
+        .map(item => [item.Date, item.Confirmed])
     },
     ntData: function() {
       return this.jsonCovidAPIData
         .filter(data => data.Province === "Northern Territory")
-        .map(item => [item.Date, item.Active])
+        .map(item => [item.Date, item.Confirmed])
     },
     waData: function() {
       return this.jsonCovidAPIData
         .filter(data => data.Province === "Western Australia")
-        .map(item => [item.Date, item.Active])
+        .map(item => [item.Date, item.Confirmed])
     },
     qldTrace: function() {
       return {
@@ -103,11 +103,11 @@ export default {
   },
   watch: {
     data() {
-      Plotly.react("active-plot", this.data, this.layout, this.config)
+      Plotly.react("confirmed-plot", this.data, this.layout, this.config)
     }
   },
   mounted() {
-    Plotly.newPlot("active-plot", this.data, this.layout, this.config)
+    Plotly.newPlot("confirmed-plot", this.data, this.layout, this.config)
   }
 }
 </script>
