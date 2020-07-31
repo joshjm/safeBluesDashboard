@@ -22,6 +22,7 @@
     <active-cases-plot v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
 
     <h2>John Hopkins Covid data: (to compare)</h2>
+    <data-table v-bind:jsonCovidData="this.jsonCovidData" />
     <v-data-table
       :headers="headers"
       :items="jsonCovidAPIData"
@@ -37,12 +38,14 @@
 import Plotly from "plotly.js"
 import Header from "@/components/Header.vue"
 import ActiveCasesPlot from "@/components/dashboard/ActiveCasesPlot.vue"
+import DataTable from "@/components/dashboard/DataTable.vue"
 const axios = require("axios").default
 export default {
   name: "Dashboard",
   components: {
     Header,
-    ActiveCasesPlot
+    ActiveCasesPlot,
+    DataTable
   },
   data: () => {
     return {
