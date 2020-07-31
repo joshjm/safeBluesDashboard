@@ -1,50 +1,52 @@
 <template>
   <div class="my-dashboard-container">
     <Header />
-    <!-- TODO: refactor the table into a component -->
-    <div class="table">
-      <v-card
-        class="mx-auto"
-        max-width="344"
-        v-for="item in safeBluesData.stats"
-        :key="item.strandId"
-      >
-        <v-card-text>
-          <h3>Strain Id: {{ item.strandId }}</h3>
-          <p>Times: {{ item.times }}</p>
-          <p>Total incubating strands: {{ item.totalIncubatingStrands }}</p>
-          <p>Total infected strands: {{ item.totalInfectedStrands }}</p>
-          <p>Total removed strands: {{ item.totalRemovedStrands }}</p>
-        </v-card-text>
-      </v-card>
+    <div v-show="(jsonCovidAPIData.length ==0) || (safeBluesData.length==0) ">
+      <h3>Loading...</h3>
+      <img alt="SafeBlues logo" class="loading-spinner" src="../assets/logo.svg" />
     </div>
-    <v-container fluid>
-      <v-row>
-        <v-col cols="12">
-          <h2>John Hopkins Covid data: (to compare)</h2>
-          <data-table v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
-        </v-col>
+    <div v-show="(jsonCovidAPIData.length !==0) && (safeBluesData.length!==0) ">
+      <!-- TODO: refactor the table into a component -->
+      <div class="table">
+        <v-card
+          class="mx-auto"
+          max-width="344"
+          v-for="item in safeBluesData.stats"
+          :key="item.strandId"
+        >
+          <v-card-text>
+            <h3>Strain Id: {{ item.strandId }}</h3>
+            <p>Times: {{ item.times }}</p>
+            <p>Total incubating strands: {{ item.totalIncubatingStrands }}</p>
+            <p>Total infected strands: {{ item.totalInfectedStrands }}</p>
+            <p>Total removed strands: {{ item.totalRemovedStrands }}</p>
+          </v-card-text>
+        </v-card>
+      </div>
+      <v-container fluid>
         <v-row>
-          <v-col cols="6">
-            <active-cases-plot
-              v-bind:jsonCovidAPIData="this.jsonCovidAPIData"
-            />
+          <v-col cols="12">
+            <h2>John Hopkins Covid data: (to compare)</h2>
+            <data-table v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
           </v-col>
-          <v-col cols="6">
-            <confirmed-cases-plot
-              v-bind:jsonCovidAPIData="this.jsonCovidAPIData"
-            />
-          </v-col>
+          <v-row>
+            <v-col cols="6">
+              <active-cases-plot v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
+            </v-col>
+            <v-col cols="6">
+              <confirmed-cases-plot v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
+            </v-col>
+          </v-row>
         </v-row>
-      </v-row>
-    </v-container>
-    <!-- <v-data-table
+      </v-container>
+      <!-- <v-data-table
       :headers="headers"
       :items="jsonCovidAPIData"
       :items-per-page="20"
       class="elevation-1"
     >
-    </v-data-table>-->
+      </v-data-table>-->
+    </div>
   </div>
 </template>
 
@@ -88,3 +90,17 @@ export default {
   }
 }
 </script>
+<style scoped>
+@keyframes rotation {
+  from {
+    transform: rotate(359deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+.loading-spinner {
+  max-width: 60px;
+  animation: rotation 2s infinite linear;
+}
+</style>
