@@ -2,8 +2,10 @@
   <div>
     <v-data-table
       :headers="headers"
-      :items="jsonCovidAPIData"
-      :items-per-page="20"
+      :items="this.jsonCovidAPIData"
+      :items-per-page="10"
+      :sort-by.sync="sortBy"
+      :sort-desc.sync="descending"
       class="elevation-1"
     >
     </v-data-table>
@@ -16,6 +18,8 @@ export default {
   props: ["jsonCovidAPIData"],
   data: () => {
     return {
+      sortBy: "Date",
+      descending: true,
       headers: [
         // {text: 'Country', value: 'Country'},
         // {text: "Country Code", value: "CountryCode"},

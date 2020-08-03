@@ -57,7 +57,8 @@ export default {
         },
 
         width: 500
-      }
+      },
+      config: { responsive: true }
     }
   },
   computed: {
@@ -71,6 +72,7 @@ export default {
   watch: {
     shape() {
       this.updateData()
+<<<<<<< HEAD
       this.$store.state.virusParameters.shape = this.shape
       Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout)
     },
@@ -78,6 +80,13 @@ export default {
       this.updateData()
       this.$store.state.virusParameters.rate = this.rate
       Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout)
+=======
+      Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout, this.config)
+    },
+    rate() {
+      this.updateData()
+      Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout, this.config)
+>>>>>>> 7f5a7ecbf9b92a7ba0f1abeb6d7a843dda889123
     }
   },
   methods: {
@@ -102,7 +111,7 @@ export default {
 
   mounted() {
     this.updateData()
-    Plotly.newPlot("plot", [{ x: this.x, y: this.y }], this.layout)
+    Plotly.newPlot("plot", [{ x: this.x, y: this.y }], this.layout, this.config)
   }
 }
 </script>
