@@ -7,54 +7,54 @@
       <v-col cols="6">
         <v-form>
           <v-text-field
-            v-model="$store.state.virusParameters.strandID"
+            v-model="virusParameters.strandID"
             label="Strand ID"
             required
           ></v-text-field>
           <v-text-field
-            v-model="$store.state.virusParameters.startDate"
+            v-model="virusParameters.startDate"
             label="startDate"
             type="date"
             required
           ></v-text-field>
           <v-text-field
-            v-model="$store.state.virusParameters.startTime"
+            v-model="virusParameters.startTime"
             label="startTime"
             type="time"
             required
           ></v-text-field>
           <v-text-field
-            v-model="$store.state.virusParameters.endDate"
+            v-model="virusParameters.endDate"
             label="endDate"
             type="date"
             required
           ></v-text-field>
           <v-text-field
-            v-model="$store.state.virusParameters.endTime"
+            v-model="virusParameters.endTime"
             label="endTime"
             type="time"
             required
           ></v-text-field>
 
           <v-text-field
-            v-model="$store.state.virusParameters.seedingProbability"
+            v-model="virusParameters.seedingProbability"
             label="Seeding Probability"
             type="number"
             required
           ></v-text-field>
           <v-text-field
-            v-model="$store.state.virusParameters.infectionProbabilityMap"
+            v-model="virusParameters.infectionProbabilityMap"
             label="Infection Probability Map"
             required
           ></v-text-field>
           <v-text-field
-            v-model="$store.state.virusParameters.incubationPeriodDistribution"
+            v-model="virusParameters.incubationPeriodDistribution"
             label="incubationPeriodDistribution"
             required
           ></v-text-field>
 
           <button type="button" v-on:click="sendData" class="btn btn-success">
-            Infect {{ $store.state.virusParameters.strandID }}
+            Infect {{ virusParameters.strandID }}
           </button>
           <p>virus params: {{ this.virusParameters }}</p>
         </v-form>
