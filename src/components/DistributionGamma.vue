@@ -62,6 +62,7 @@ export default {
     }
   },
   computed: {
+    
     shape: function() {
       return  this.mean ** 2 / this.variance
     },
