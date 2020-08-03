@@ -1,8 +1,6 @@
 <template>
   <div class="container">
     <!-- display for debugging -->
-    shape {{$store.state.virusParameters.shape}}
-    rate {{$store.state.virusParameters.rate}}
     shape: {{ Math.round(100 * shape) / 100 }}, rate:
     {{ Math.round(100 * rate) / 100 }}, mean: {{ mean }}, var: {{ variance }}
     <div class="row">
@@ -62,7 +60,6 @@ export default {
     }
   },
   computed: {
-    
     shape: function() {
       return  this.mean ** 2 / this.variance
     },
@@ -73,12 +70,14 @@ export default {
   watch: {
     shape() {
       this.updateData()
-      this.$store.state.virusParameters.shape = this.shape
+      this.$store.commit('updateRate', this.rate)
+      this.$store.commit('updateShape', this.shape)
       Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout)
     },
     rate() {
       this.updateData()
-      this.$store.state.virusParameters.rate = this.rate
+      this.$store.commit('updateRate', this.rate)
+      this.$store.commit('updateShape', this.shape)
       Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout)
     }
   },

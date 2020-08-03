@@ -55,6 +55,7 @@
 import Header from "@/components/Header.vue"
 import ActiveCasesPlot from "@/components/dashboard/ActiveCasesPlot.vue"
 import ConfirmedCasesPlot from "@/components/dashboard/ConfirmedCasesPlot.vue"
+import { mapState } from 'vuex'
 import DataTable from "@/components/dashboard/DataTable.vue"
 const axios = require("axios").default
 export default {
@@ -67,26 +68,34 @@ export default {
   },
   data: () => {
     return {
-      jsonCovidAPIData: [],
-      safeBluesData: []
+      // jsonCovidAPIData: [],
+      // safeBluesData: []
     }
   },
   methods: {},
-  computed: {},
+  computed: {
+    ...mapState([
+      'safeBluesData',
+      'jsonCovidAPIData'
+    ])
+  },
   watch: {},
   created() {
     // get data from covid19 api
     // NOTE: keeping out of the active-plot component as other components may need this data
-    axios
-      .get("https://api.covid19api.com/dayone/country/australia")
-      .then(response => (this.jsonCovidAPIData = response.data))
+    if (this.safeBluesData.length == 0 || this.covid19APIData.length == 0) {
 
+      axios
+      .get("https://api.covid19api.com/dayone/country/australia")
+      .then(response => (this.$store.commit('storeCovidData',  response.data)))
+      .catch(error => console.log(error))
     // get data from safe blues AWS
     const safeBluesURL = "https://api.safeblues.org/stats"
     axios
       .get(safeBluesURL)
-      .then(response => (this.safeBluesData = response.data))
+      .then(response => (this.$store.commit('storeSafeBluesData',  response.data)))
       .catch(error => console.log(error))
+    }
   }
 }
 </script>
