@@ -8,60 +8,58 @@
         <h3 class="center">New Virus Parameters</h3>
         <v-form>
           <v-text-field
-            v-model="strandID"
+            v-model="$store.state.virusParameters.strandID"
             label="Strand ID"
             required
           ></v-text-field>
           <v-text-field
-            v-model="startDate"
+            v-model="$store.state.virusParameters.startDate"
             label="startDate"
             type="date"
             required
           ></v-text-field>
           <v-text-field
-            v-model="startTime"
+            v-model="$store.state.virusParameters.startTime"
             label="startTime"
             type="time"
             required
           ></v-text-field>
           <v-text-field
-            v-model="endDate"
+            v-model="$store.state.virusParameters.endDate"
             label="endDate"
             type="date"
             required
           ></v-text-field>
           <v-text-field
-            v-model="endTime"
+            v-model="$store.state.virusParameters.endTime"
             label="endTime"
             type="time"
             required
           ></v-text-field>
 
           <v-text-field
-            v-model="seedingProbability"
+            v-model="$store.state.virusParameters.seedingProbability"
             label="Seeding Probability"
             type="number"
             required
           ></v-text-field>
           <v-text-field
-            v-model="infectionProbabilityMap"
+            v-model="$store.state.virusParameters.infectionProbabilityMap"
             label="Infection Probability Map"
             required
           ></v-text-field>
           <v-text-field
-            v-model="incubationPeriodDistribution"
+            v-model="$store.state.virusParameters.incubationPeriodDistribution"
             label="incubationPeriodDistribution"
             required
           ></v-text-field>
-          <v-combobox
-            v-model="infectiousPeriodDistribution"
-            label="infectiousPeriodDistribution"
-            :items="distributions"
-            required
-          ></v-combobox>
+          
           <button type="button" v-on:click="sendData" class="btn btn-success">
-            Infect
+            Infect {{ $store.state.virusParameters.strandID }}
           </button>
+          <p>
+          virus params: {{ $store.state.virusParameters }}
+          </p>
         </v-form>
       </v-col>
     </v-row>
@@ -80,7 +78,7 @@ export default {
     return {
       distributions: ["Gamma", "other"],
       safeBluesURL: "api.safeblues.org:5000/stats/1",
-      strandID: "this is the id",
+      strandID: "",
       startTime: "",
       startDate: "",
       endTime: "",
