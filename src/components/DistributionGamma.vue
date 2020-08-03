@@ -1,8 +1,7 @@
 <template>
   <div class="container">
-    <!-- display for debugging -->
-    shape: {{ Math.round(100 * shape) / 100 }}, rate:
-    {{ Math.round(100 * rate) / 100 }}, mean: {{ mean }}, var: {{ variance }}
+    <h4> Incubation Distribution </h4>
+    <h5> Mean </h5>
     <div class="row">
       <input type="text" class="form-control w-25" v-model="mean" />
       <input
@@ -10,11 +9,12 @@
         v-model="mean"
         min="0"
         max="20"
-        class="custom-range"
+        class="custom-range w-75"
         step="0.5"
         id="customRange1"
       />
     </div>
+    <h5> Variance </h5>
     <div class="row">
       <input type="text" class="form-control w-25" v-model="variance" />
       <input
@@ -22,7 +22,7 @@
         v-model="variance"
         min="0"
         max="25"
-        class="custom-range"
+        class="custom-range w-75"
         step="0.1"
         id="customRange2"
       />
@@ -56,12 +56,12 @@ export default {
 
         width: 500
       },
-      config: { responsive: true }
+      config: { responsive: true, displayModeBar: false }
     }
   },
   computed: {
     shape: function() {
-      return  this.mean ** 2 / this.variance
+      return this.mean ** 2 / this.variance
     },
     rate: function() {
       return this.mean / this.variance
@@ -70,14 +70,14 @@ export default {
   watch: {
     shape() {
       this.updateData()
-      this.$store.commit('updateRate', this.rate)
-      this.$store.commit('updateShape', this.shape)
+      this.$store.commit("updateRate", this.rate)
+      this.$store.commit("updateShape", this.shape)
       Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout)
     },
     rate() {
       this.updateData()
-      this.$store.commit('updateRate', this.rate)
-      this.$store.commit('updateShape', this.shape)
+      this.$store.commit("updateRate", this.rate)
+      this.$store.commit("updateShape", this.shape)
       Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout)
     }
   },

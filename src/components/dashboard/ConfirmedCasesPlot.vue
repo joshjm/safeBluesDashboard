@@ -13,7 +13,7 @@ export default {
       layout: {
         title: "Confirmed cases"
       },
-      config: { responsive: true }
+      config: { responsive: true, displayModeBar: false }
     }
   },
   computed: {

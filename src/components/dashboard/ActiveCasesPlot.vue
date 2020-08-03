@@ -13,7 +13,8 @@ export default {
       layout: {
         title: "Active cases"
       },
-      config: { responsive: true }
+      config: { responsive: true,
+      displayModeBar: false}
     }
   },
   computed: {

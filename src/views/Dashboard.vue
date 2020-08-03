@@ -1,42 +1,39 @@
 <template>
   <div class="my-dashboard-container">
     <Header />
-    <div v-show="(jsonCovidAPIData.length ==0) || (safeBluesData.length==0) ">
+    <div v-show="jsonCovidAPIData.length == 0 || safeBluesData.length == 0">
       <h3>Loading...</h3>
-      <img alt="SafeBlues logo" class="loading-spinner" src="../assets/logo.svg" />
+      <img
+        alt="SafeBlues logo"
+        class="loading-spinner"
+        src="../assets/logo.svg"
+      />
     </div>
-    <div v-show="(jsonCovidAPIData.length !==0) && (safeBluesData.length!==0) ">
-      <!-- TODO: refactor the table into a component -->
-      <div class="table">
-        <v-card
-          class="mx-auto"
-          max-width="344"
-          v-for="item in safeBluesData.stats"
-          :key="item.strandId"
-        >
-          <v-card-text>
-            <h3>Strain Id: {{ item.strandId }}</h3>
-            <p>Times: {{ item.times }}</p>
-            <p>Total incubating strands: {{ item.totalIncubatingStrands }}</p>
-            <p>Total infected strands: {{ item.totalInfectedStrands }}</p>
-            <p>Total removed strands: {{ item.totalRemovedStrands }}</p>
-          </v-card-text>
-        </v-card>
-      </div>
+    <div
+      v-show="
+        $store.state.jsonCovidAPIData.length !== 0 &&
+          $store.state.safeBluesData.length !== 0
+      "
+    >
+      <SafeBluesCards />
       <v-container fluid>
         <v-row>
           <v-col cols="12">
-            <h2>John Hopkins Covid data: (to compare)</h2>
+            <h2>John Hopkins Covid data:</h2>
             <data-table v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
           </v-col>
-          <v-row>
-            <v-col cols="6">
-              <active-cases-plot v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
-            </v-col>
-            <v-col cols="6">
-              <confirmed-cases-plot v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
-            </v-col>
-          </v-row>
+        </v-row>
+        <v-row>
+          <v-col cols="6">
+            <active-cases-plot
+              v-bind:jsonCovidAPIData="this.jsonCovidAPIData"
+            />
+          </v-col>
+          <v-col cols="6">
+            <confirmed-cases-plot
+              v-bind:jsonCovidAPIData="this.jsonCovidAPIData"
+            />
+          </v-col>
         </v-row>
       </v-container>
       <!-- <v-data-table
@@ -55,8 +52,9 @@
 import Header from "@/components/Header.vue"
 import ActiveCasesPlot from "@/components/dashboard/ActiveCasesPlot.vue"
 import ConfirmedCasesPlot from "@/components/dashboard/ConfirmedCasesPlot.vue"
-import { mapState } from 'vuex'
+import { mapState } from "vuex"
 import DataTable from "@/components/dashboard/DataTable.vue"
+import SafeBluesCards from "@/components/dashboard/SafeBluesCards.vue"
 const axios = require("axios").default
 export default {
   name: "Dashboard",
@@ -64,7 +62,8 @@ export default {
     Header,
     ActiveCasesPlot,
     ConfirmedCasesPlot,
-    DataTable
+    DataTable,
+    SafeBluesCards
   },
   data: () => {
     return {
@@ -74,27 +73,28 @@ export default {
   },
   methods: {},
   computed: {
-    ...mapState([
-      'safeBluesData',
-      'jsonCovidAPIData'
-    ])
+    ...mapState(["safeBluesData", "jsonCovidAPIData"])
   },
   watch: {},
   created() {
     // get data from covid19 api
     // NOTE: keeping out of the active-plot component as other components may need this data
-    if (this.safeBluesData.length == 0 || this.covid19APIData.length == 0) {
-
+    if (
+      this.$store.state.safeBluesData.length == 0 ||
+      this.$store.state.jsonCovidAPIData.length == 0
+    ) {
       axios
-      .get("https://api.covid19api.com/dayone/country/australia")
-      .then(response => (this.$store.commit('storeCovidData',  response.data)))
-      .catch(error => console.log(error))
-    // get data from safe blues AWS
-    const safeBluesURL = "https://api.safeblues.org/stats"
-    axios
-      .get(safeBluesURL)
-      .then(response => (this.$store.commit('storeSafeBluesData',  response.data)))
-      .catch(error => console.log(error))
+        .get("https://api.covid19api.com/dayone/country/australia")
+        .then(response => this.$store.commit("storeCovidData", response.data))
+        .catch(error => console.log(error))
+      // get data from safe blues AWS
+      const safeBluesURL = "https://api.safeblues.org/stats"
+      axios
+        .get(safeBluesURL)
+        .then(response =>
+          this.$store.commit("storeSafeBluesData", response.data)
+        )
+        .catch(error => console.log(error))
     }
   }
 }
