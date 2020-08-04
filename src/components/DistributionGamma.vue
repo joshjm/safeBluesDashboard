@@ -45,7 +45,7 @@ export default {
       y: [],
       overflow: false,
       layout: {
-        title: "Incubation Period",
+        title: "Incubation Period PDF",
         autosize: true,
         xaxis: {
           title: "days"
@@ -84,7 +84,7 @@ export default {
   methods: {
     gammaDist: function(x, shape, rate) {
       if (gamma(shape) == Infinity) {
-        // gamma(shape) can grow to E300, and cause NaNs.
+        // gamma(shape) can grow to 10**300, and cause NaNs.
         this.overflow = true
         return 0
       }
@@ -107,3 +107,12 @@ export default {
   }
 }
 </script>
+
+<style  scoped>
+  .custom-range {
+    padding: 10px
+  }
+  div.row { 
+    align-items: center;
+  }
+</style>

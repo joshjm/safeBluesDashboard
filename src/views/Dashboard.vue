@@ -15,12 +15,16 @@
           $store.state.safeBluesData.length !== 0
       "
     >
-      <SafeBluesCards />
       <v-container fluid>
+        <row>
+          <v-col cols="12">
+            <StrandDataTable />
+          </v-col>
+        </row>
         <v-row>
           <v-col cols="12">
-            <h2>John Hopkins Covid data:</h2>
-            <data-table v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
+            <!-- TODO: remove the bind, and fetch that data from vuex store -->
+            <data-table v-bind:jsonCovidAPIData="this.jsonCovidAPIData" /> 
           </v-col>
         </v-row>
         <v-row>
@@ -54,7 +58,7 @@ import ActiveCasesPlot from "@/components/dashboard/ActiveCasesPlot.vue"
 import ConfirmedCasesPlot from "@/components/dashboard/ConfirmedCasesPlot.vue"
 import { mapState } from "vuex"
 import DataTable from "@/components/dashboard/DataTable.vue"
-import SafeBluesCards from "@/components/dashboard/SafeBluesCards.vue"
+import StrandDataTable from "@/components/dashboard/StrandDataTable.vue"
 const axios = require("axios").default
 export default {
   name: "Dashboard",
@@ -63,7 +67,7 @@ export default {
     ActiveCasesPlot,
     ConfirmedCasesPlot,
     DataTable,
-    SafeBluesCards
+    StrandDataTable
   },
   data: () => {
     return {
@@ -88,7 +92,8 @@ export default {
         .then(response => this.$store.commit("storeCovidData", response.data))
         .catch(error => console.log(error))
       // get data from safe blues AWS
-      const safeBluesURL = "https://api.safeblues.org/stats"
+      // const safeBluesURL = "https://api.safeblues.org/stats"
+      const safeBluesURL = "https://api.safeblues.org/admin/list"
       axios
         .get(safeBluesURL)
         .then(response =>

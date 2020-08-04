@@ -1,5 +1,7 @@
 <template>
   <div>
+            <h2>John Hopkins Covid data:</h2>
+
     <v-data-table
       :headers="headers"
       :items="this.jsonCovidAPIData"

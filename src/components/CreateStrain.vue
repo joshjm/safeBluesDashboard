@@ -53,7 +53,7 @@
             required
           ></v-text-field>
 
-          <button type="button" v-on:click="sendData" class="btn btn-success">
+          <button type="button" @click="sendData" class="btn btn-success">
             Infect {{ virusParameters.strandID }}
           </button>
           <p>virus params: {{ this.virusParameters }}</p>
@@ -76,7 +76,8 @@ export default {
   data: () => {
     return {
       distributions: ["Gamma", "other"],
-      safeBluesURL: "api.safeblues.org:5000/stats/1"
+      safeBluesURL: "api.safeblues.org:5000/stats",
+      safeBluesPostURL: "api.safeblues.org/admin/new"
     }
   },
   computed: {
@@ -87,15 +88,8 @@ export default {
   methods: {
     sendData: function() {
       axios
-        .post(this.safeBluesURL, {
-          strandID: this.strandID,
-          startTime: this.startTime,
-          endTime: this.endTime,
-          seedingProbability: this.seedingProbability,
-          infectionProbabilityMap: this.infectionProbabilityMap,
-          incubationPeriodDistribution: this.incubationPeriodDistribution,
-          infectiousPeriodDistribution: this.infectiousPeriodDistribution
-        })
+        .post(this.safeBluesPostURL, this.$store.state.virusParameters
+        )
         .then(function(response) {
           console.log(response)
         })

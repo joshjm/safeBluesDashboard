@@ -1,8 +1,21 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/dashboard">Dashboard</router-link> |
-    <router-link to="/admin">Admin</router-link>
-  </div>
+  <v-toolbar>
+    <v-btn icon>
+      <img alt="SafeBlues logo" src="../assets/logo.svg" />
+
+    </v-btn>
+    <v-toolbar-title class="title">SafeBlues</v-toolbar-title>
+    <v-spacer></v-spacer>
+
+    <v-toolbar-items class="hidden-sm-and-down">
+      <v-btn @click="$router.push('/')" text> Home </v-btn>
+      <v-btn @click="$router.push('/about')" text> About </v-btn>
+      <v-btn @click="$router.push('/dashboard')" text> Dashboard </v-btn>
+      <v-btn @click="$router.push('/admin')" text> Admin </v-btn>
+    </v-toolbar-items>
+  </v-toolbar>
 </template>
+  <style scoped>
+    img { 
+      height: 35px   }
+  </style>
