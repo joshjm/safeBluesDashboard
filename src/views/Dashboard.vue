@@ -16,11 +16,11 @@
       "
     >
       <v-container fluid>
-        <row>
+        <v-row>
           <v-col cols="12">
             <StrandDataTable />
           </v-col>
-        </row>
+        </v-row>
         <v-row>
           <v-col cols="12">
             <!-- TODO: remove the bind, and fetch that data from vuex store -->
@@ -93,9 +93,9 @@ export default {
         .catch(error => console.log(error))
       // get data from safe blues AWS
       // const safeBluesURL = "https://api.safeblues.org/stats"
-      const safeBluesURL = "https://api.safeblues.org/admin/list"
+      // const safeBluesURL = "https://api.safeblues.org/admin/list"
       axios
-        .get(safeBluesURL)
+        .get(this.$store.state.safeBluesURL)
         .then(response =>
           this.$store.commit("storeSafeBluesData", response.data)
         )

@@ -8,7 +8,8 @@ export default new Vuex.Store({
     virusParameters: {
       incubationShape: 100,
       incubationRate: 14,
-      strandID: null,
+      infectiousnessScale: 1,
+      strandId: null,
       startTime: null,
       endTime: null,
       seedingProbability: null,
@@ -17,7 +18,8 @@ export default new Vuex.Store({
       infectiousPeriodDistribution: null
     },
     jsonCovidAPIData: [],
-    safeBluesData: []
+    safeBluesData: [],
+    safeBluesURL: "https://api.safeblues.org/admin/list"
   },
   mutations: {
     updateVirusParameters(state, virusParameters) {
