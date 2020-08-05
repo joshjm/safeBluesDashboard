@@ -1,4 +1,4 @@
-# Safe Blues Dashbaord
+# Safe Blues Dashboard
 
 Live [github pages site](https://joshjm.github.io/safeBluesDashboard/)
 
