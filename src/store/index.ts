@@ -6,16 +6,17 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     virusParameters: {
-      incubationShape: 100,
-      incubationRate: 14,
-      infectiousnessScale: 1,
       strandId: null,
+      startDate: null,
       startTime: null,
+      endDate: null,
       endTime: null,
       seedingProbability: null,
       infectionProbabilityMap: null,
-      incubationPeriodDistribution: null,
-      infectiousPeriodDistribution: null
+      incubationShape: null,
+      incubationRate: null,
+      infectiousShape: null,
+      infectiousRate: null
     },
     jsonCovidAPIData: [],
     safeBluesData: [],
@@ -25,11 +26,17 @@ export default new Vuex.Store({
     updateVirusParameters(state, virusParameters) {
       state.virusParameters = virusParameters
     },
-    updateShape(state, newShape) {
+    updateIncubationShape(state, newShape) {
       state.virusParameters.incubationShape = newShape
     },
-    updateRate(state, newRate) {
+    updateIncubationRate(state, newRate) {
       state.virusParameters.incubationRate = newRate
+    },
+    updateInfectiousShape(state, newShape) {
+      state.virusParameters.infectiousShape = newShape
+    },
+    updateInfectiousRate(state, newRate) {
+      state.virusParameters.infectiousRate = newRate
     },
     storeSafeBluesData(state, safeBluesData) {
       state.safeBluesData = safeBluesData

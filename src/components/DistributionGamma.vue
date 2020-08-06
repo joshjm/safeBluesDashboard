@@ -1,12 +1,11 @@
 <template>
   <div class="container">
-    <h4>Incubation Distribution</h4>
-    <h5>Mean</h5>
+    <h5>Incubation Mean</h5>
     <div class="row">
-      <input type="text" class="form-control w-25" v-model="mean" />
+      <input type="text" class="form-control w-25" v-model="incubationMean" />
       <input
         type="range"
-        v-model="mean"
+        v-model="incubationMean"
         min="0"
         max="20"
         class="custom-range w-75"
@@ -14,12 +13,46 @@
         id="customRange1"
       />
     </div>
-    <h5>Variance</h5>
+    <h5>Incubation Variance</h5>
     <div class="row">
-      <input type="text" class="form-control w-25" v-model="variance" />
+      <input
+        type="text"
+        class="form-control w-25"
+        v-model="incubationVariance"
+      />
       <input
         type="range"
-        v-model="variance"
+        v-model="incubationVariance"
+        min="0"
+        max="25"
+        class="custom-range w-75"
+        step="0.1"
+        id="customRange2"
+      />
+    </div>
+    <h5>Infectious Mean</h5>
+    <div class="row">
+      <input type="text" class="form-control w-25" v-model="infectiousMean" />
+      <input
+        type="range"
+        v-model="infectiousMean"
+        min="0"
+        max="20"
+        class="custom-range w-75"
+        step="0.5"
+        id="customRange1"
+      />
+    </div>
+    <h5>Infectious Variance</h5>
+    <div class="row">
+      <input
+        type="text"
+        class="form-control w-25"
+        v-model="infectiousVariance"
+      />
+      <input
+        type="range"
+        v-model="infectiousVariance"
         min="0"
         max="25"
         class="custom-range w-75"
@@ -39,14 +72,22 @@ export default {
   name: "DistributionGamma",
   data: () => {
     return {
-      mean: 14,
-      variance: 2,
+      incubationMean: 14,
+      incubationVariance: 5,
+      infectiousMean: 7,
+      infectiousVariance: 6,
       x: [],
-      y: [],
+      incubationY: [],
+      infectiousY: [],
       overflow: false,
       layout: {
         title: "Incubation Period PDF",
         autosize: true,
+        legend: {
+          x: 1,
+          xanchor: "right",
+          y: 1
+        },
         xaxis: {
           title: "days"
         },
@@ -60,25 +101,72 @@ export default {
     }
   },
   computed: {
-    shape: function() {
-      return this.mean ** 2 / this.variance
+    incubationShape: function() {
+      return this.incubationMean ** 2 / this.incubationVariance
     },
-    rate: function() {
-      return this.mean / this.variance
+    incubationRate: function() {
+      return this.incubationMean / this.incubationVariance
+    },
+    infectiousShape: function() {
+      return this.infectiousMean ** 2 / this.infectiousVariance
+    },
+    infectiousRate: function() {
+      return this.infectiousMean / this.infectiousVariance
     }
   },
   watch: {
-    shape() {
+    incubationShape() {
       this.updateData()
-      this.$store.commit("updateRate", this.rate)
-      this.$store.commit("updateShape", this.shape)
-      Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout)
+      this.$store.commit("updateIncubationRate", this.incubationRate)
+      this.$store.commit("updateIncubationShape", this.incubationShape)
+      // TODO: move plotly.react into its own method for DRY
+      Plotly.react(
+        "plot",
+        [
+          { x: this.x, y: this.incubationY, name: "incubation" },
+          { x: this.x, y: this.infectiousY, name: "infectious" }
+        ],
+        this.layout
+      )
     },
-    rate() {
+    incubationRate() {
       this.updateData()
-      this.$store.commit("updateRate", this.rate)
-      this.$store.commit("updateShape", this.shape)
-      Plotly.react("plot", [{ x: this.x, y: this.y }], this.layout)
+      this.$store.commit("updateIncubationRate", this.incubationRate)
+      this.$store.commit("updateIncubationShape", this.incubationShape)
+      Plotly.react(
+        "plot",
+        [
+          { x: this.x, y: this.incubationY, name: "incubation" },
+          { x: this.x, y: this.infectiousY, name: "infectious" }
+        ],
+        this.layout
+      )
+    },
+    infectiousShape() {
+      this.updateData()
+      this.$store.commit("updateInfectiousRate", this.infectiousRate)
+      this.$store.commit("updateInfectiousShape", this.infectiousShape)
+      Plotly.react(
+        "plot",
+        [
+          { x: this.x, y: this.incubationY, name: "incubation" },
+          { x: this.x, y: this.infectiousY, name: "infectious" }
+        ],
+        this.layout
+      )
+    },
+    infectiousRate() {
+      this.updateData()
+      this.$store.commit("updateInfectiousRate", this.infectiousRate)
+      this.$store.commit("updateInfectiousShape", this.infectiousShape)
+      Plotly.react(
+        "plot",
+        [
+          { x: this.x, y: this.incubationY, name: "incubation" },
+          { x: this.x, y: this.infectiousY, name: "infectious" }
+        ],
+        this.layout
+      )
     }
   },
   methods: {
@@ -96,14 +184,36 @@ export default {
       return value
     },
     updateData: function() {
-      this.x = [...Array(25 * 10).keys()].map(val => val / 10)
-      this.y = this.x.map(val => this.gammaDist(val, this.shape, this.rate))
+      //TODO: only update the data for the parameter that has been changed to make the page react faster
+      this.incubationY = this.x.map(val =>
+        this.gammaDist(val, this.incubationShape, this.incubationRate)
+      )
+      this.infectiousY = this.x.map(val =>
+        this.gammaDist(val, this.infectiousShape, this.infectiousRate)
+      )
     }
   },
 
   mounted() {
+    this.x = [...Array(25 * 10).keys()].map(val => val / 10) // keep above this.updateData
     this.updateData()
-    Plotly.newPlot("plot", [{ x: this.x, y: this.y }], this.layout, this.config)
+    Plotly.newPlot(
+      "plot",
+      [
+        { x: this.x, y: this.incubationY, name: "incubation" },
+        { x: this.x, y: this.infectiousY, name: "infectious" }
+      ],
+      this.layout,
+      this.config
+    )
+    this.$store.state.virusParameters.incubationShape =
+      this.incubationMean ** 2 / this.incubationVariance
+    this.$store.state.virusParameters.incubationRate =
+      this.incubationMean / this.incubationVariance
+    this.$store.state.virusParameters.infectiousShape =
+      this.infectiousMean ** 2 / this.infectiousVariance
+    this.$store.state.virusParameters.infectiousRate =
+      this.infectiousMean / this.infectiousVariance
   }
 }
 </script>

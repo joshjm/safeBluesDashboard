@@ -54,7 +54,7 @@
             required
           ></v-text-field>
 
-          <v-layout row  justify-space-between>
+          <v-layout row justify-space-between>
             <v-col cols="6">
               <v-text-field
                 v-model="virusParameters.incubationShape"
@@ -88,8 +88,12 @@
             </v-col>
           </v-layout>
 
-          <button type="button" @click="sendData" class="btn btn-success">
-            Infect {{ virusParameters.strandId }}
+          <button
+            type="button"
+            @click="sendData"
+            class="btn x-large  btn-success w-100"
+          >
+            ☣INFECT☣ {{ virusParameters.strandId }}
           </button>
         </v-form>
       </v-col>
@@ -101,8 +105,6 @@
 import DistributionGamma from "@/components/DistributionGamma.vue"
 import axios from "axios"
 import { mapState } from "vuex"
-// import {Strand} from "@/pb/sb_pb"
-// const Schema = require("@/pb/sb_pb");
 import Schema from "@/pb/sb_pb"
 import proto from "google-protobuf"
 export default {
@@ -121,6 +123,9 @@ export default {
     // mapping data from the vuex store into the component
 
     ...mapState(["virusParameters"])
+    // startTimestamp: function() {
+
+    // }
   },
   methods: {
     sendData: function() {
