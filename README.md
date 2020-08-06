@@ -23,3 +23,14 @@ To push build to production (github pages)
 ```
 After ensuring `deploy.sh` is executable with `chmod +x deploy.sh`.
 
+
+compiling protos
+
+``` proto3
+protoc -I. --js_out=import_style=commonjs,binary:. sb.proto 
+
+protoc -I. --js_out="import_style=commonjs,binary:." sb.proto
+
+from root
+protoc --js_out=import_style=commonjs,binary:. ./src/pb/sb.proto 
+```

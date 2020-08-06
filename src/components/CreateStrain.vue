@@ -87,7 +87,10 @@
 import DistributionGamma from "@/components/DistributionGamma.vue"
 import axios from "axios"
 import { mapState } from "vuex"
-
+// import {Strand} from "@/pb/sb_pb"
+// const Schema = require("@/pb/sb_pb");
+import Schema from "@/pb/sb_pb"
+import proto from "google-protobuf"
 export default {
   name: "CreateStrain",
   components: {
@@ -113,12 +116,30 @@ export default {
         .catch(error => console.log(error))
         //then update the data store
         .then(
-        axios.get(this.$store.state.safeBluesURL)
-        .then(response =>
-          this.$store.commit("storeSafeBluesData", response.data)
-        )
+          axios
+            .get(this.$store.state.safeBluesURL)
+            .then(response =>
+              this.$store.commit("storeSafeBluesData", response.data)
+            )
         )
         .catch(error => console.log(error))
+    },
+
+    dateStringToTimestampConverter: function(dateString, timeString) {
+      const dateArr = dateString.split("-")
+      const timeArr = timeString.split(":")
+      const seconds = 0
+      const milliseconds = 0
+      const dateGenerationArray = [
+        ...dateArr,
+        ...timeArr,
+        seconds,
+        milliseconds
+      ]
+      const date = new Date(...dateGenerationArray)
+      const timestamp = new proto.google.protobuf.Timestamp()
+      timestamp.fromDate(date)
+      return timestamp
     }
   }
 }

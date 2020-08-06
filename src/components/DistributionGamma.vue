@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <h4> Incubation Distribution </h4>
-    <h5> Mean </h5>
+    <h4>Incubation Distribution</h4>
+    <h5>Mean</h5>
     <div class="row">
       <input type="text" class="form-control w-25" v-model="mean" />
       <input
@@ -14,7 +14,7 @@
         id="customRange1"
       />
     </div>
-    <h5> Variance </h5>
+    <h5>Variance</h5>
     <div class="row">
       <input type="text" class="form-control w-25" v-model="variance" />
       <input
@@ -108,11 +108,11 @@ export default {
 }
 </script>
 
-<style  scoped>
-  .custom-range {
-    padding: 10px
-  }
-  div.row { 
-    align-items: center;
-  }
+<style scoped>
+.custom-range {
+  padding: 10px;
+}
+div.row {
+  align-items: center;
+}
 </style>

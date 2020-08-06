@@ -24,7 +24,7 @@
         <v-row>
           <v-col cols="12">
             <!-- TODO: remove the bind, and fetch that data from vuex store -->
-            <data-table v-bind:jsonCovidAPIData="this.jsonCovidAPIData" /> 
+            <data-table v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
           </v-col>
         </v-row>
         <v-row>
