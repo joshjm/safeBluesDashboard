@@ -6,6 +6,7 @@
  * @public
  */
 // GENERATED CODE -- DO NOT EDIT!
+//  prettier-ignore-start
 
 var jspb = require('google-protobuf');
 var goog = jspb;
@@ -556,3 +557,5 @@ proto.Strand.prototype.hasInfectiousPeriod = function() {
 
 
 goog.object.extend(exports, proto);
+
+//prettier-ignore-end
