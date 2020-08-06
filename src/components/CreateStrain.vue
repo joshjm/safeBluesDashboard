@@ -50,29 +50,43 @@
           <h5>Virus Phenotype</h5>
           <v-text-field
             v-model="virusParameters.infectionProbabilityMap"
-            label="Infection Probability Map"
+            label="Infection Probability"
             required
           ></v-text-field>
-          <v-text-field
-            v-model="virusParameters.incubationPeriodDistribution"
-            label="incubation Period Distribution"
-            required
-          ></v-text-field>
-          <v-text-field
-            v-model="virusParameters.incubationShape"
-            label="Incubation Shape"
-            required
-          ></v-text-field>
-          <v-text-field
-            v-model="virusParameters.incubationRate"
-            label="Incubaton Rate"
-            required
-          ></v-text-field>
-          <v-text-field
-            v-model="virusParameters.infectiousnessScale"
-            label="Infectiousness"
-            required
-          ></v-text-field>
+
+          <v-layout row  justify-space-between>
+            <v-col cols="6">
+              <v-text-field
+                v-model="virusParameters.incubationShape"
+                label="Incubation Shape"
+                required
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="6">
+              <v-text-field
+                v-model="virusParameters.incubationRate"
+                label="Incubation Rate"
+                required
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="6">
+              <v-text-field
+                v-model="virusParameters.infectiousShape"
+                label="infectious Shape"
+                required
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="6">
+              <v-text-field
+                v-model="virusParameters.infectiousRate"
+                label="infectious Rate"
+                required
+              ></v-text-field>
+            </v-col>
+          </v-layout>
 
           <button type="button" @click="sendData" class="btn btn-success">
             Infect {{ virusParameters.strandId }}
