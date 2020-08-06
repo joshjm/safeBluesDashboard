@@ -69,7 +69,13 @@
     "rules": {}
   },
   "prettier": {
-    "semi": false
+    "semi": false,
+    "overrides": [
+      {
+        "files": "sb_pb.js",
+        "excludeFiles": true
+      }
+    ]
   },
   "browserslist": [
     "> 1%",
