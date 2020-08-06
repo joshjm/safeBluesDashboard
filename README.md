@@ -7,7 +7,8 @@ See the [trello board](https://trello.com/b/zOFm4RfY/safeblues-dashboard) for up
 Dependencies:
 - plotly for plots
 - mathjs for gamma function
-
+- google-protobuf for protobuffers
+- 
 ## Setup
 To run development server locally:
 ```

@@ -70,12 +70,7 @@
   },
   "prettier": {
     "semi": false,
-    "overrides": [
-      {
-        "files": "sb_pb.js",
-        "excludeFiles": true
-      }
-    ]
+    "ignorePatterns": ["src/pb/**"] 
   },
   "browserslist": [
     "> 1%",
