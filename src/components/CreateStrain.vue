@@ -106,8 +106,8 @@ import DistributionGamma from "@/components/DistributionGamma.vue"
 import axios from "axios"
 import { mapState } from "vuex"
 import Schema from "@/pb/sb_pb"
-import proto from "google-protobuf"
-import { time } from 'd3'
+// import proto from "google-protobuf"
+import { time } from "d3"
 export default {
   name: "CreateStrain",
   components: {
@@ -121,48 +121,72 @@ export default {
       startTime: null,
       startDate: null,
       endTime: null,
-      endDate: null,
-            
+      endDate: null
     }
   },
   computed: {
     // mapping data from the vuex store into the component
     ...mapState(["virusParameters"])
-
-    // startTimestamp: function() {
-
-    // }
   },
-  //startTime, startDate, endTime, endDate
   watch: {
     startTime() {
-      if (this.startTime && this.startDate){
-        const startTimestamp = this.dateStringToTimestampConverter( this.startDate, this.startTime);
+      if (this.startTime && this.startDate) {
+        const startTimestamp = this.dateStringToTimestampConverter(
+          this.startDate,
+          this.startTime
+        )
         this.$store.commit("updateStartTimestamp", startTimestamp)
       }
     },
     startDate() {
-      if (this.startTime && this.startDate){
-        const startTimestamp = this.dateStringToTimestampConverter( this.startDate, this.startTime);
+      if (this.startTime && this.startDate) {
+        const startTimestamp = this.dateStringToTimestampConverter(
+          this.startDate,
+          this.startTime
+        )
         this.$store.commit("updateStartTimestamp", startTimestamp)
       }
     },
     endTime() {
-      if (this.endTime && this.endDate){
-        const endTimestamp = this.dateStringToTimestampConverter( this.endDate, this.endTime);
+      if (this.endTime && this.endDate) {
+        const endTimestamp = this.dateStringToTimestampConverter(
+          this.endDate,
+          this.endTime
+        )
         this.$store.commit("updateEndTimestamp", endTimestamp)
       }
     },
     endDate() {
-      if (this.endTime && this.endDate){
-        const endTimestamp = this.dateStringToTimestampConverter( this.endDate, this.endTime);
+      if (this.endTime && this.endDate) {
+        const endTimestamp = this.dateStringToTimestampConverter(
+          this.endDate,
+          this.endTime
+        )
         this.$store.commit("updateEndTimestamp", endTimestamp)
       }
-    },
-    
+    }
   },
   methods: {
     sendData: function() {
+      const incubationGamma = new Schema.GammaDistribution()
+      incubationGamma.setShape(this.virusParameters.incubationShape)
+      incubationGamma.setRate(this.virusParameters.incubationRate)
+
+      const infectiousGamma = new Schema.GammaDistribution()
+      infectiousGamma.setShape(this.virusParameters.infectiousShape)
+      infectiousGamma.setRate(this.virusParameters.infectiousRate)
+
+      const mystrain = new Schema.Strand()
+      mystrain.setStrandId(this.virusParameters.strandId)
+      mystrain.setStartTime(this.virusParameters.startTimestamp)
+      mystrain.setEndTime(this.virusParameters.endTimestamp)
+      mystrain.setSeedingProbability(this.virusParameters.seedingProbability)
+      mystrain.setInfectionProbability(
+        this.virusParameters.infectionProbabilityMap
+      )
+      mystrain.setIncubationPeriod(this.virusParameters.incubationGamma)
+      mystrain.setInfectiousPeriod(this.virusParameters.infectiousGamma)
+
       axios
         .post(this.safeBluesPostURL, this.virusParameters)
         .then(response => console.log(response))
