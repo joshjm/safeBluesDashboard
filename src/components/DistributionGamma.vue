@@ -115,6 +115,8 @@ export default {
     }
   },
   watch: {
+    // TODO: move all these watchers into computed properties (if possible) ie watch all in one line and call plotly react
+    // and move all the store calls to the computed?
     incubationShape() {
       this.updateData()
       this.$store.commit("updateIncubationRate", this.incubationRate)

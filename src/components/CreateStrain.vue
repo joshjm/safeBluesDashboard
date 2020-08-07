@@ -17,25 +17,25 @@
           <h5>Experimental Conditions</h5>
 
           <v-text-field
-            v-model="virusParameters.startDate"
+            v-model="startDate"
             label="startDate"
             type="date"
             required
           ></v-text-field>
           <v-text-field
-            v-model="virusParameters.startTime"
+            v-model="startTime"
             label="startTime"
             type="time"
             required
           ></v-text-field>
           <v-text-field
-            v-model="virusParameters.endDate"
+            v-model="endDate"
             label="endDate"
             type="date"
             required
           ></v-text-field>
           <v-text-field
-            v-model="virusParameters.endTime"
+            v-model="endTime"
             label="endTime"
             type="time"
             required
@@ -93,7 +93,7 @@
             @click="sendData"
             class="btn x-large  btn-success w-100"
           >
-            ☣INFECT☣ {{ virusParameters.strandId }}
+            ☣ INFECT ☣
           </button>
         </v-form>
       </v-col>
@@ -107,6 +107,7 @@ import axios from "axios"
 import { mapState } from "vuex"
 import Schema from "@/pb/sb_pb"
 import proto from "google-protobuf"
+import { time } from 'd3'
 export default {
   name: "CreateStrain",
   components: {
@@ -116,16 +117,49 @@ export default {
     return {
       distributions: ["Gamma", "other"],
       safeBluesURL: "api.safeblues.org:5000/stats",
-      safeBluesPostURL: "https://api.safeblues.org/admin/new"
+      safeBluesPostURL: "https://api.safeblues.org/admin/new",
+      startTime: null,
+      startDate: null,
+      endTime: null,
+      endDate: null,
+            
     }
   },
   computed: {
     // mapping data from the vuex store into the component
-
     ...mapState(["virusParameters"])
+
     // startTimestamp: function() {
 
     // }
+  },
+  //startTime, startDate, endTime, endDate
+  watch: {
+    startTime() {
+      if (this.startTime && this.startDate){
+        const startTimestamp = this.dateStringToTimestampConverter( this.startDate, this.startTime);
+        this.$store.commit("updateStartTimestamp", startTimestamp)
+      }
+    },
+    startDate() {
+      if (this.startTime && this.startDate){
+        const startTimestamp = this.dateStringToTimestampConverter( this.startDate, this.startTime);
+        this.$store.commit("updateStartTimestamp", startTimestamp)
+      }
+    },
+    endTime() {
+      if (this.endTime && this.endDate){
+        const endTimestamp = this.dateStringToTimestampConverter( this.endDate, this.endTime);
+        this.$store.commit("updateEndTimestamp", endTimestamp)
+      }
+    },
+    endDate() {
+      if (this.endTime && this.endDate){
+        const endTimestamp = this.dateStringToTimestampConverter( this.endDate, this.endTime);
+        this.$store.commit("updateEndTimestamp", endTimestamp)
+      }
+    },
+    
   },
   methods: {
     sendData: function() {

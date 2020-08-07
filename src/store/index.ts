@@ -7,10 +7,8 @@ export default new Vuex.Store({
   state: {
     virusParameters: {
       strandId: null,
-      startDate: null,
-      startTime: null,
-      endDate: null,
-      endTime: null,
+      startTimestamp: null,
+      endTimestamp: null,
       seedingProbability: null,
       infectionProbabilityMap: null,
       incubationShape: null,
@@ -43,6 +41,12 @@ export default new Vuex.Store({
     },
     storeCovidData(state, covidData) {
       state.jsonCovidAPIData = covidData
+    },
+    updateStartTimestamp(state, timestamp) {
+      state.virusParameters.startTimestamp = timestamp;
+    },
+    updateEndTimestamp(state, timestamp) {
+      state.virusParameters.endTimestamp = timestamp;
     }
   },
   actions: {},
