@@ -106,7 +106,8 @@ import DistributionGamma from "@/components/DistributionGamma.vue"
 import axios from "axios"
 import { mapState } from "vuex"
 import Schema from "@/pb/sb_pb"
-// import proto from "google-protobuf"
+// import "google/protobuf/timestamp.proto";
+import proto from "google-protobuf"
 import { time } from "d3"
 export default {
   name: "CreateStrain",

@@ -94,7 +94,6 @@ export default {
         yaxis: {
           range: [0, 1]
         },
-
         width: 500
       },
       config: { responsive: true, displayModeBar: false }
