@@ -9,13 +9,22 @@
         src="../assets/logo.svg"
       />
     </div>
+    
     <div
       v-show="
         $store.state.jsonCovidAPIData.length !== 0 &&
           $store.state.safeBluesData.length !== 0
       "
     >
-      <v-row>
+     
+      <!-- <v-data-table
+      :headers="headers"
+      :items="jsonCovidAPIData"
+      :items-per-page="20"
+      class="elevation-1"
+    >
+      </v-data-table>-->
+     <v-row>
         <v-col cols="12">
           <StrandDataTable />
         </v-col>
@@ -25,12 +34,7 @@
           <!-- TODO: remove the bind, and fetch that data from vuex store -->
           <data-table v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
         </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <active-cases-plot v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
-        </v-col>
-      </v-row>
+      </v-row>    
       <v-row>
         <v-col cols="12">
           <confirmed-cases-plot
@@ -38,14 +42,13 @@
           />
         </v-col>
       </v-row>
-      <!-- <v-data-table
-      :headers="headers"
-      :items="jsonCovidAPIData"
-      :items-per-page="20"
-      class="elevation-1"
-    >
-      </v-data-table>-->
-    </div>
+      <v-row>
+        <v-col cols="12">
+          <active-cases-plot v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
+        </v-col>
+      </v-row>
+  
+      </div>
   </div>
 </template>
 
@@ -78,7 +81,7 @@ export default {
     ...mapState(["safeBluesData", "jsonCovidAPIData"])
   },
   watch: {},
-  created() {
+  mounted() {
     // get data from covid19 api
     // NOTE: keeping out of the active-plot component as other components may need this data
     if (

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <h5>Incubation Mean</h5>
     <div class="row">
       <input type="text" class="form-control w-25" v-model="incubationMean" />
