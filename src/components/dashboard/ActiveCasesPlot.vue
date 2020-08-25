@@ -1,7 +1,5 @@
 <template>
-  <div>
     <div id="active-plot"></div>
-  </div>
 </template>
 
 <script>

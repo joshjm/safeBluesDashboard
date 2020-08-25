@@ -15,31 +15,29 @@
           $store.state.safeBluesData.length !== 0
       "
     >
-      <v-container fluid>
-        <v-row>
-          <v-col cols="12">
-            <StrandDataTable />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="12">
-            <!-- TODO: remove the bind, and fetch that data from vuex store -->
-            <data-table v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="12">
-            <active-cases-plot
-              v-bind:jsonCovidAPIData="this.jsonCovidAPIData"
-            />
-          </v-col>
-          <v-col cols="12">
-            <confirmed-cases-plot
-              v-bind:jsonCovidAPIData="this.jsonCovidAPIData"
-            />
-          </v-col>
-        </v-row>
-      </v-container>
+      <v-row>
+        <v-col cols="12">
+          <StrandDataTable />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+          <!-- TODO: remove the bind, and fetch that data from vuex store -->
+          <data-table v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+          <active-cases-plot v-bind:jsonCovidAPIData="this.jsonCovidAPIData" />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+          <confirmed-cases-plot
+            v-bind:jsonCovidAPIData="this.jsonCovidAPIData"
+          />
+        </v-col>
+      </v-row>
       <!-- <v-data-table
       :headers="headers"
       :items="jsonCovidAPIData"

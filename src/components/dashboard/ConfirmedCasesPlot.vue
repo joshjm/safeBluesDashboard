@@ -1,7 +1,5 @@
 <template>
-  <div>
     <div id="confirmed-plot"></div>
-  </div>
 </template>
 
 <script>
