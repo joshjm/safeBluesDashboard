@@ -28,12 +28,12 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="6">
+          <v-col cols="12">
             <active-cases-plot
               v-bind:jsonCovidAPIData="this.jsonCovidAPIData"
             />
           </v-col>
-          <v-col cols="6">
+          <v-col cols="12">
             <confirmed-cases-plot
               v-bind:jsonCovidAPIData="this.jsonCovidAPIData"
             />
